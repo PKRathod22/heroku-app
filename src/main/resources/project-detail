@@ -1,0 +1,10 @@
+if gradlew not run
+$./gradlew build -x test
+
+If no known web frameworks are detected, it will run 
+$./gradlew stage
+
+add in build.gradle:==
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
