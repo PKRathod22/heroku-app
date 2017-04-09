@@ -8,3 +8,51 @@ add in build.gradle:==
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Build process
+-----------------
+1.make build 
+./gradlew stage
+
+2.after build finish refresh eclipse and paste jar file from build/libs/app-name.jar
+
+3.deploy  to the heroku server
+$git push heroku master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
