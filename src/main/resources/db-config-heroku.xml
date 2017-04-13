@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+	<!-- Postgres Database Definition Start -->
+
+	<bean id="parentDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+            abstract="true">
+            <property name="driverClassName" value="org.postgresql.Driver" />
+            <property name="username" value="oqfttdwwlgzsmh" />
+			<property name="password" value="0ce30112458d99e736a72593f518696183645dbd13f7536f343877fc59120db7" />
+            
+            <property name="maxTotal" value="25" />
+            <property name="maxIdle" value="1" />
+            <property name="minIdle" value="0" />
+            
+            <property name="validationQuery" value="SELECT 1 " />
+            <property name="validationQueryTimeout" value="300" />
+            
+        </bean>
+        
+	<bean id="javaTechDataSource" parent="parentDataSource">
+		<property name="url" value="jdbc:postgresql://ec2-107-20-255-96.compute-1.amazonaws.com:5432/dd7c96382bsgre?useUnicode=yes&amp;characterEncoding=UTF-8" />
+	</bean>
+	
+
+	<!-- <bean id="tenant1DataSource" parent="parentDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/tenant_1" />
+	</bean> -->
+
+	<!-- Postgres Database Definition Ends-->
+
+
+	
+	<bean id="dataSource" class="com.pk.configuration.SessionRoutingDataSource">
+		<property name="targetDataSources">
+			<map>
+				<entry key="EFS" value-ref="javaTechDataSource" />
+				<!-- <entry key="tenant_1" value-ref="tenant1DataSource" /> -->
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="javaTechDataSource" />
+
+	</bean>
+
+
+
+</beans>

@@ -1,16 +1,26 @@
 package com.pk.controller;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pk.repository.CustomerRepository;
+
+
+
 @RestController
-@Service
 public class MyRestController {
 
-	@RequestMapping(value="/hello", method=RequestMethod.GET)
+	@Autowired
+	CustomerRepository repository;
+	
+	@RequestMapping(value="/check", method=RequestMethod.GET)
 	public String m1(){
-		return "hello app";
+		return "Working well";
 	}
+
+	
+	
+	
 }
