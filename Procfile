@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar build/libs/heroku-pk-app-0.0.1.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar build/libs/heroku-pk-app-0.0.1.jar
