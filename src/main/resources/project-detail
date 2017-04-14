@@ -1,0 +1,134 @@
+****************************************************************************************************************************
+
+************************HEROKU APP TECH DETAIL*****************************************************************************
+
+******************************************************************************************************************************
+
+
+
+how to crete Heroku app in spring boot-
+1.register your account in heroku and then on github.[wwww.heroku.com , www.github.com ]
+2.create new repository on github with README.md file alone.
+3.open eclipse and then import your created project from github using cloning.
+4.Right click on project and configure->convert as gradle project.
+5.add Procfile(jar deploy to heroku server),build.gradle(for dependency),gradlew(to make build),setting.gradle(to make root project)  
+
+
+
+
+
+if gradlew not run
+$./gradlew build -x test
+
+If no known web frameworks are detected, it will run 
+$./gradlew stage
+
+add in build.gradle:==
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Build process
+-----------------
+1.make build 
+./gradlew stage
+
+2.jar file path:-  build/libs/app-name.jar must present in Procfile same as where u d=weitten in build.gradle .
+app-name created automatic from build.gradle which defined in jar{} and 
+
+3.deploy  to the heroku server
+$git push heroku master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===================application.properties==========================================
+server.port: ${port:8081}
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:postgresql://localhost/testdb
+spring.jpa.show-sql = true
+spring.datasource.username=postgres
+spring.datasource.password=password
+spring.jpa.generate-ddl=true
+
+
+
+
+Facing Problem
+***************************
+=>Heroku Build FAILRD : NOT UPDATE
+generate latest gradle wrapper and also this will automatice create/update your gradlew(for ubuntu),gradlew.bat(for windows) while execute this command 
+$gradle wrapper 
+
+
+
+ =>ERROR: Cannot load JDBC driver class 'org.postgresql.Driver
+ after run ./gradlew stage ->heroku local
+ But i can able to run project in eclipse
+ 
+ reason: postgres jar file not copied in to build/libs/app-jar while making build
+ 
+ solution: 
+ 
+ build.gradle:
+ 
+ dependencies{
+     testRuntime("org.postgresql:postgresql:9.3-1102-jdbc41")
+ }
+ 
+ change to
+ 
+ dependencies{
+     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+ }
+ 
+ =>ERROR:Unable to build Hibernate SessionFactory
+ 
+ 
+ solution-> 
+ change 
+ testRuntime("org.postgresql:postgresql:9.3-1102-jdbc41")
+ to compile("org.postgresql:postgresql:9.3-1102-jdbc41")
+
+Configurations allow you to scope dependencies. Given this configuration hierarchy:
+
+testRuntime -> testCompile -> runtime -> compile
+
+Each configuration helps you limit where your dependencies are. *Runtime configurations allow you to include a dependency,
+ but not have it as a compile dependency. This is helpful when you want to keep a framework loosely coupled from a project. 
+ A runtime dependency means that you need it for the app to run, but don't need it to compile.
+
+
+
+
+
+link
+http://stackoverflow.com/questions/13357676/unable-to-connect-to-postgres-sql

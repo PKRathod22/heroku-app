@@ -13,8 +13,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 	<bean id="parentDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
             abstract="true">
             <property name="driverClassName" value="org.postgresql.Driver" />
-            <property name="username" value="oqfttdwwlgzsmh" />
-			<property name="password" value="0ce30112458d99e736a72593f518696183645dbd13f7536f343877fc59120db7" />
+            <property name="username" value="lbsnknfzqendqf" />
+			<property name="password" value="4a434790626e9d7594fd64e47606756c15865254757a9bc6400c21522d627efd" />
             
             <property name="maxTotal" value="25" />
             <property name="maxIdle" value="1" />
@@ -26,7 +26,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         </bean>
         
 	<bean id="javaTechDataSource" parent="parentDataSource">
-		<property name="url" value="jdbc:postgresql://ec2-107-20-255-96.compute-1.amazonaws.com:5432/dd7c96382bsgre?useUnicode=yes&amp;characterEncoding=UTF-8" />
+		<property name="url" value="jdbc:postgresql://ec2-107-20-195-181.compute-1.amazonaws.com:5432/d6a97lnm7658ln?useUnicode=yes&amp;characterEncoding=UTF-8" />
 	</bean>
 	
 
