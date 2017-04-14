@@ -1,1 +1,0 @@
-web: java $JAVA_OPTS -jar build/libs/heroku-pk-app-0.0.1-SNAPSHOT.jar
