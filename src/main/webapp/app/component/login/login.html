@@ -45,14 +45,24 @@
 							ng-model="userLogin.newUser.mobile" required maxlength="10"> 
 						 <input
 							type="password" class="form-control" placeholder="Your password"
-							ng-model="userLogin.newUser.password" required maxlength="100"> 
-					    
-					<fieldset>
-					<div class="login button">
+							ng-model="userLogin.newUser.password" required maxlength="100">
+							
+							<div class="select-auto ">
+								<md-radio-group ng-model="userLogin.newUser.gender" id="{{'transport'+$index}}"> 
+									<md-radio-button 
+									value="Male" class="md-primary fieldgroup">Male</md-radio-button> 
+									<md-radio-button value="Female" class="md-primary fieldgroup">Female</md-radio-button>
+									<md-radio-button value="Other" class="md-primary fieldgroup">Other</md-radio-button> 
+								</md-radio-group>
+							</div> 
+							<div class="login button ">
 						<button class="btn btn-sm" type="submit"
 							ng-click="createAccount(userLogin)">Create Account</button>
 
 					</div>
+					    
+					<fieldset>
+					
 		      </form>
       </uib-tab>
     </uib-tabset>
