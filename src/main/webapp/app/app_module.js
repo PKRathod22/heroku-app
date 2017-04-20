@@ -1,5 +1,13 @@
-var app = angular.module("herokuApp",
+var app = angular.module("myApp",
     ['ngRoute',
      'ui.router',
-     'ngResource'
+     'ngResource',
+     'ui-notification',
+     'ngDialog',
+     'ui.bootstrap',
+      'ngAnimate',
+      'ngSanitize',
+      'ui-notification',
+      'ngStorage',
+      'ngMaterial'
     ]);

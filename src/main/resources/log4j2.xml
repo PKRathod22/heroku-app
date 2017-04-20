@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+	<Properties>
+		<Property name="log-path">./</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console-Appender" target="SYSTEM_OUT"
+			immediateFlush="true">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{TrackId}] [%X{SID}] [%t] %c{1}:%L - %msg%n
+				</pattern>
+			</PatternLayout>
+		</Console>
+		<File name="File-Appender" fileName="logs/heroku-xmlfilelog.log"
+			immediateFlush="true">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{TrackId}] [%X{SID}] [%t] %c{1}:%L - %msg%n
+				</pattern>
+			</PatternLayout>
+		</File>
+		<RollingFile name="RollingFile" fileName="${log-path}/heroku-core.log"
+			filePattern="${log-path}/heroku-edi-%d{yyyy-MM-dd}-%i.log" immediateFlush="true">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{TrackId}] [%X{SID}] [%t] %c{1}:%L - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5120 KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.pk" level="info">
+			<AppenderRef ref="File-Appender" />
+		</Logger> 
+		<Logger name="com.pk" level="info">
+			<AppenderRef ref="RollingFile" />
+		</Logger> 
+		<Root level="trace">
+			<AppenderRef ref="Console-Appender" />
+		</Root>
+	</Loggers>
+</Configuration>

@@ -1,0 +1,63 @@
+<div  ng-controller="headerCtrl" >
+   
+<div ng-show="tabShow">
+  <form name="outerForm" class="tab-form-demo">
+    <uib-tabset active="activeForm">
+      <uib-tab index="0" heading="Log In">
+        <ng-form name="nestedForm">
+          <div class="form-group">
+          <form>
+			<fieldset>
+			<div class="form-group">
+				<h3 style="margin: 13px 33px !important">Log in</h3>
+				<input type="text" maxlength="10" class="form-control"
+					 placeholder="Enter your Mobile"
+					ng-model="newUser.mobile" required>
+					<a href="javascript:void(0)" title="Close" tabindex="-1" class="closebtn" ng-click="cancel()">&times;</a> 
+				<input type="password" maxlength="100" class="form-control"
+					placeholder="Enter Password" ng-model="newUser.password"
+					required>
+					</div>
+				<fieldset>
+					<div class="login button">
+						<button class="btn btn-sm" type="submit"
+							ng-click="login(newUser)">Log In</button>
+						<a href="#">Forgot password?</a>
+					</div>
+		     </form>
+           </div>
+         </ng-form>
+      </uib-tab>
+      <uib-tab index="1" heading="Sign Up">
+         <form>
+					<fieldset>
+						<h3 style="margin: 13px 33px !important">Sign Up</h3>
+						<input type="text" class="form-control" 
+							placeholder="Your name" ng-model="userLogin.newUser.userName"
+							required maxlength="100"> 
+							<a href="javascript:void(0)" title="Close" tabindex="-1" class="closebtn" ng-click="cancel()">&times;</a>
+					   </span> 
+					    <input type="text"
+							class="form-control" placeholder="Your email"
+							ng-model="userLogin.newUser.email" required maxlength="100">
+					      <input
+							type="text" class="form-control" placeholder="Your mobile"
+							ng-model="userLogin.newUser.mobile" required maxlength="10"> 
+						 <input
+							type="password" class="form-control" placeholder="Your password"
+							ng-model="userLogin.newUser.password" required maxlength="100"> 
+					    
+					<fieldset>
+					<div class="login button">
+						<button class="btn btn-sm" type="submit"
+							ng-click="createAccount(userLogin)">Create Account</button>
+
+					</div>
+		      </form>
+      </uib-tab>
+    </uib-tabset>
+  </form>
+</div>
+ <!-- <span
+					class="close" title="Close" ng-click="cancel()"> <img
+					src="images/cancel.png" color="blue" height="20" width="18"></span> -->

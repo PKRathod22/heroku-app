@@ -33,7 +33,7 @@ configurations {
 
 dependencies {
 
-	compile fileTree(include: ['*.jar'], dir: 'libs')
+	//compile fileTree(include: ['*.jar'], dir: 'libs')
 	compile('org.springframework.boot:spring-boot-starter-amqp')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
@@ -60,6 +60,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
+}
+task downloadDependencies(type: Exec) {
+    configurations.testRuntime.files
+    commandLine 'echo', 'Downloaded all dependencies'
 }
 
 task wrapper(type: Wrapper) {

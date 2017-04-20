@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.pk.dto.BaseDto;
+import com.pk.enumeration.Gender;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -16,12 +17,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2 
 public class AppUtil {
 	
-   /*@Autowired
-    LanguageDetailService languageDetailService;
-   */
-    
-    
-
 	public BaseDto setDesc(BaseDto dto) {
 		log.debug("Response Message being sent to the client : " ,dto.getResponseCode() + " --> " + getDesc(dto.getResponseCode()));
 		dto.setResponseDescription(getDesc(dto.getResponseCode()));
@@ -37,7 +32,7 @@ public class AppUtil {
 			List<Class> classes = new ArrayList();
 			
 
-			//classes.add(AddressType.class);
+			classes.add(Gender.class);
 			
 			
 			return classes;
