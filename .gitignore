@@ -1,9 +1,3 @@
 build
 .gradle
-.idea
-out
-*.iml
-*.ipr
-*.iws
-.env
-.DS_Store
+*.properties
