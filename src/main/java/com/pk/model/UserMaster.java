@@ -11,18 +11,26 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+import lombok.ToString;
+
 @Entity
 @Table
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@ToString()
+@Data
 public class UserMaster implements Serializable {
 	
 	private static final long serialVersionUID = -6513828693331958787L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
 	Long id;
-	@Column
+	
+	@Column(name="name")
 	String name;
-	@Column
+	
+	@Column(name="password")
 	String password;
 	
 	
