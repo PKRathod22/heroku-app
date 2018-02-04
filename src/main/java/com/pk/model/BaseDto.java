@@ -1,15 +1,13 @@
-package com.pk.dto;
+package com.pk.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.MDC;
-
 import lombok.Getter;
 import lombok.Setter;
 public class BaseDto{
-
-	@Getter @Setter String trackId;
+	
+	@Getter @Setter int totalRecords =  0;
 	
 	@Getter @Setter String responseCode;
 	
@@ -17,10 +15,10 @@ public class BaseDto{
 
 	@Getter @Setter Object responseObject;
 	
-	@Getter @Setter List<String> params = new ArrayList<String>();
+	@Getter @Setter List<?> responseObjects = new ArrayList<>();
 	
 	public BaseDto(){
-		trackId = (String) MDC.get("TrackId");
+
 	}
 	
 }
