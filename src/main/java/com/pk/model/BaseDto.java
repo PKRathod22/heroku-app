@@ -1,24 +1,30 @@
 package com.pk.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
+@Data
 public class BaseDto{
 	
-	@Getter @Setter int totalRecords =  0;
-	
-	@Getter @Setter String responseCode;
-	
-	@Getter @Setter String responseDescription;
+	int statusCode = 2000;
 
-	@Getter @Setter Object responseObject;
-	
-	@Getter @Setter List<?> responseObjects = new ArrayList<>();
-	
-	public BaseDto(){
+	String message;
 
+	String errorDescription;
+
+	int totalRecords = 0;
+	
+	Object responseContent;
+
+	List<?> responseContents;
+	
+	public BaseDto(String string, String error) {
+		this.message = string;
+		this.errorDescription = error;
+	}
+
+	public BaseDto() {
 	}
 	
 }

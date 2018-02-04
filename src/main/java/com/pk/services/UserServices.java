@@ -9,7 +9,10 @@ import com.pk.model.BaseDto;
 import com.pk.model.UserMaster;
 import com.pk.repositoy.UserRepository;
 
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class UserServices {
 
 	
@@ -19,8 +22,15 @@ public class UserServices {
 	
 	public BaseDto getAll(){
 		BaseDto baseDto = new BaseDto();
-		 List<UserMaster> user = userRepository.findAll();
-		 baseDto.setResponseObjects(user);
+		try{
+		 List<UserMaster> userList = userRepository.findAll();
+		 log.info("user master list "+userList);
+		 baseDto.setResponseContents(userList);
+		 baseDto.setTotalRecords(userList.size());
+		}catch(Exception e){
+			log.error("found eror in user : [",e);
+			baseDto.setErrorDescription("failed");
+		}
 		return baseDto;
 		
 	}
