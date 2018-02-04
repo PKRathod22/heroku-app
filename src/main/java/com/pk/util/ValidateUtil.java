@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.pk.enumeration.LovStatus;
 import com.pk.exception.RestException;
 
 import lombok.extern.log4j.Log4j2;
@@ -85,20 +84,8 @@ public class ValidateUtil {
 		if(d>e){
 			
 			throw new RestException(errorCode);
-			
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 	public static void validateEnum(Class<?> enumType, Object object, String errorCode) throws RestException {
@@ -175,24 +162,6 @@ public class ValidateUtil {
 
 	
 	
-
-	
-	
-	
-	public static void isStatusBlocked(LovStatus status, String errorCode) {
-		if(status.equals(LovStatus.Block)) {
-			log.info("Status is Blocked. Throwing error code : " + errorCode);
-			throw new RestException(errorCode);
-		}
-	}
-	
-	public static void isStatusHidden(LovStatus status, String errorCode) {
-		if(status.equals(LovStatus.Hide)) {
-			log.info("Status is Hidden. Throwing error code : " + errorCode);
-			throw new RestException(errorCode);
-		}
-	}
-	
 	public static void belowRange(double value, double minValue, String errorCode) {
 		if(value < minValue) {
 			throw new RestException(errorCode);
@@ -217,16 +186,6 @@ if(object<min){
 }
 		
 }
-	
-
-	public static void isPortInCountry(String countryCode, String isCountry, String errorCode) {
-
-		if(!countryCode.equals(isCountry)){
-			throw new RestException(errorCode);
-		}
-		
-	}
-	
 	
 
 
