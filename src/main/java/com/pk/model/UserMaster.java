@@ -1,5 +1,7 @@
 package com.pk.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class UserMaster {
-
+public class UserMaster implements Serializable {
+	
+	private static final long serialVersionUID = -6513828693331958787L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long id;
