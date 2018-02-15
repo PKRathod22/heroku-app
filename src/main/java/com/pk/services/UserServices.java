@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pk.exception.ErrorCode;
+import com.pk.exception.RestException;
 import com.pk.model.BaseDto;
 import com.pk.model.UserMaster;
 import com.pk.repositoy.UserRepository;
@@ -20,6 +21,41 @@ public class UserServices {
 	@Autowired
 	UserRepository userRepository;
 	
+	public BaseDto login(UserMaster user){
+		BaseDto baseDto = new BaseDto();
+		try {
+			if(user!=null && user.getDistributerId()!=null && user.getPassword() !=null){
+			    UserMaster existingUser = userRepository.findByUserAndPassword(user.getDistributerId().trim(),user.getPassword().trim());
+			    if(existingUser == null && existingUser.getDistributerId()==null){
+			    	log.info("not valid user");
+			    	throw new RestException(ErrorCode.FAILED);
+			    }
+			    baseDto.setResponseContent(existingUser);
+			    baseDto.setErrorDescription(ErrorCode.SUCCESS);
+			}
+		} catch (Exception e) {
+			 baseDto.setErrorDescription(ErrorCode.FAILED);
+           log.error("error found while login");
+		}
+		return baseDto;
+	}
+	
+	
+	public BaseDto getById(String distributerId){
+		BaseDto baseDto = new BaseDto();
+		log.info("get By id start Distributer  ID : "+distributerId);
+		try {
+		    UserMaster userMaster = userRepository.findByDistributerId(distributerId.trim());
+		    baseDto.setResponseContent(userMaster);
+		    baseDto.setErrorDescription(ErrorCode.SUCCESS);
+			log.info("user master getbyid successfully");
+		} catch (Exception e) {
+			baseDto.setErrorDescription(e.getMessage());
+			log.error("found exception in user master getby id",e);
+		}
+		return baseDto;
+	}
+	
 	public BaseDto registor(UserMaster user){
 		BaseDto baseDto = new BaseDto();
 		log.info("register start");
@@ -33,6 +69,7 @@ public class UserServices {
 		}
 		return baseDto;
 	}
+	
 	public BaseDto updateUser(UserMaster user){
 		BaseDto baseDto = new BaseDto();
 		userRepository.save(user);

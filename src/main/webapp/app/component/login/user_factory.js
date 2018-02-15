@@ -1,7 +1,7 @@
 (function() {
 		
-		app.factory("ContactView", function($resource) {
-			return $resource("/api/pk/contact/get/getall", {}, {
+		app.factory("UserGetById", function($resource) {
+			return $resource("/user/get/id/:id", {}, {
 				get : {
 					method : 'GET',
 					params : {
@@ -16,6 +16,15 @@
 		app.factory("RegisterUser", function($resource) {
 			return $resource("/user/register/create", {}, {
 				save : {
+					method : 'POST'
+				}
+			});
+		});
+		
+		
+		app.factory("LoginUser", function($resource) {
+			return $resource("/user/login", {}, {
+				get : {
 					method : 'POST'
 				}
 			});

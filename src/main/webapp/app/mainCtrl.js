@@ -1,10 +1,66 @@
-app.controller('mainCtrl',function($scope, $state, $rootScope, $timeout,Notification,RegisterUser){
+app.controller('mainCtrl',function($scope, $state, $rootScope, $timeout,Notification,RegisterUser,UserGetById,LoginUser){
 console.log('called main..');
 
 $scope.errorMap = new Map();
    $scope.userMaster = {};
    $scope.loginFlag = true;
    $scope.registerFlag = false;
+   
+   $scope.getById = function(id) {
+		console.log("getById ", id);
+		
+		UserGetById.get({
+  			id : id
+  		}, function(data) {
+  			if (data.responseCode =="ERR0"){
+  				console.log("Successfully  getting user distrbuter id.", data)
+  				$scope.userMaster = data.responseObject;
+  			}else{
+  				Notification.error('user id or password is wrong !');
+  			}
+  			
+  		}, function(error) {
+  			console.log("Error while getting user distruter id.", error)
+  		});
+		
+	}
+	
+   
+   $scope.login = function(){
+	   console.log("login")
+	   if($scope.validate($scope.userMaster)){
+		   $scope.errorMap =new Map();
+		   LoginUser.get($scope.userMaster).$promise.then(function(data){
+				if(data.errorDescription=="ERR0"){
+					Notification.success('valid user!');
+				}
+				else{
+					Notification.error('user id or password is wrong !');	
+				}
+			},function(error){
+				if(data.responseDescription!=null)
+				Notification.error("internal server error !");	
+			});   
+	   }else{
+		   console.log("validation failed..") 
+	   }
+	   
+   }
+   
+   $scope.validate = function(){
+	   
+	   if($scope.userMaster.distributerId==null){
+		   $scope.errorMap.put('userId', "user id required");
+			$rootScope.navigateToNextField('userId'); 
+			 return false;
+	   }
+	   if($scope.userMaster.password==null){
+		   $scope.errorMap.put('password', "password id required");
+			$rootScope.navigateToNextField('password');
+			 return false;
+	   }
+	   return true;
+   }
    
    $scope.registerTab = function(){
 	   $scope.registerFlag = true; 
@@ -42,6 +98,9 @@ $scope.errorMap = new Map();
 			$log.info("newProducts Saving Failed : " ,error);
 		});
 	}
+	
+	
+	
 	
 	$rootScope.clear = function() {
 		console.log("Clear Method is called....!");

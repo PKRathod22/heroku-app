@@ -3,6 +3,8 @@ package com.pk.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,22 @@ public class UserController {
 		baseDto = userService.registor(user);
 		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
 	} 
+	
+	@GetMapping("/get/id/{distributerId}")
+	public ResponseEntity<BaseDto> getById(@PathVariable("distributerId") String distributerId){
+		BaseDto baseDto = new BaseDto();
+		baseDto = userService.getById(distributerId);
+		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
+	} 
+	
+	
+	@PostMapping("/login")
+	public ResponseEntity<BaseDto> login(@RequestBody UserMaster userMaster){
+		BaseDto baseDto = new BaseDto();
+		baseDto = userService.login(userMaster);
+		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
+	} 
+	
 	
 	@PutMapping("/update")
 	public ResponseEntity<BaseDto> updateUser(@RequestBody UserMaster user){

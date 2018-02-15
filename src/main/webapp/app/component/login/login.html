@@ -19,20 +19,28 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>User Id</label> <input type="email" class="form-control" max="10"
-									placeholder="User Id" ng-model="userMaster.email">
+								<label>User Id</label> <input  id="userId" class="form-control" max="10"
+									placeholder="User Id" ng-model="userMaster.distributerId">
+									<div class="client-error">
+							<span ng-show="errorMap.get('userId')!=null"> <small>{{errorMap.get('userId')}}</small>
+							</span>
+						</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Password</label> <input type="password" maxlength="50"
+								<label>Password</label> <input id="password" type="password" maxlength="50"
 									class="form-control" placeholder="Your password"
-									ng-model="userMaster.mobileNumber">
+									ng-model="userMaster.password">
+									<div class="client-error">
+							<span ng-show="errorMap.get('password')!=null"> <small>{{errorMap.get('password')}}</small>
+							</span>
+						</div>
 							</div>
 						</div>
 					</div>
 
-					<button type="submit" class="btn btn-two" ng-click="register()">Sign In</button>
+					<button type="submit" class="btn btn-two" ng-click="login()">Sign In</button>
 					<p>
 						<br />
 					</p>
