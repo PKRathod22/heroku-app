@@ -16,10 +16,11 @@ $scope.errorMap = new Map();
 	   $scope.loginFlag = true;
 	   $scope.registerFlag = false;
 	   $scope.userMaster = {};
+	   $scope.errorMap = new Map();;
    }
 	$scope.register=function(){
 		console.log('register called..');
-		$scope.errorMap = new Map();;
+		$scope.errorMap = new Map();
 		if( $scope.userMaster!=null &&  $scope.userMaster.userName == null){
 			$scope.errorMap.put('userName', "name is required");
 			$rootScope.navigateToNextField('name');
