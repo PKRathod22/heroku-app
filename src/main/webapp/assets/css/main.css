@@ -1,0 +1,12 @@
+.client-error {
+	color: red !important;
+}
+.suc-btn{
+    color: #ffff !important;
+    background-color: #4dc64d !important;
+    border-color: #66afe9 !important;
+}
+
+.font-20 {
+	font-size: 16px;
+}
