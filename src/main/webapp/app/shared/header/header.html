@@ -1,32 +1,53 @@
 <div ng-controller="headerCtrl" class="navbar navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<!-- Button for smallest screens -->
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="index.html">
-					<img class="logo-img" src="assets/images/logo.png" alt="Techro HTML5 template"></a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav pull-right mainNav">
-					<li class="active"><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="courses.html">Courses</a></li>
-					<li><a href="price.html">Price</a></li>
-					<li><a href="videos.html">Videos</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="sidebar-right.html">Right Sidebar</a></li>
-							<li><a href="#">Dummy Link1</a></li>
-							<li><a href="#">Dummy Link2</a></li>
-							<li><a href="#">Dummy Link3</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">Contact</a></li>
-					<li><a href="javascript:void(0)" ng-click="login()">Login</a></li>
-
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
+	<div class="container">
+		<div class="navbar-header">
+			<!-- Button for smallest screens -->
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="icon-bar"></span><span class="icon-bar"></span><span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand"> <img class="logo-img"
+				src="assets/images/logo.png" alt="Techro HTML5 template"></a>
 		</div>
+		<div ng-if="authUser.id==null" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav pull-right mainNav">
+				<li><a href="javascript:void(0)" ng-click="defaultDashboard()">Home</a></li>
+				<li><a href="javascript:void(0)" ng-click="about()">About</a></li>
+				<li><a href="javascript:void(0)" ng-click="courses()">Courses</a></li>
+				<li><a href="javascript:void(0)" ng-click="price()">Price</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown">Package <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0)" ng-click="link1()">Lik1</a></li>
+						<li><a href="javascript:void(0)">Link2</a></li>
+					</ul></li>
+				<li><a href="javascript:void(0)" ng-click="contact()">Contact</a></li>
+				<li><a ng-if="authUser.id==null" href="javascript:void(0)"
+					ng-click="login()">Login</a></li>
+
+			</ul>
+		</div>
+		<div ng-if="authUser.id!=null" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav pull-right mainNav">
+				<li><a href="javascript:void(0)" ng-click="price()">Price</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown">Account <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0)" ng-click="myprofile()">My
+								Profile</a></li>
+						<li><a href="javascript:void(0)" ng-click="editProfile()">Edit
+								Profile</a></li>
+						<li><a href="javascript:void(0)"
+							ng-click="logout()">Logout</a></li>
+					</ul></li>
+				<li><p ng-if="authUser.id!=null" href="javascript:void(0)">Hi
+						{{authUser.userName}}!</p></li>
+
+			</ul>
+		</div>
+
+
+		<!--/.nav-collapse -->
 	</div>
+</div>

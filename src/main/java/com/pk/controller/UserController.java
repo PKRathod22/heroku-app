@@ -1,5 +1,7 @@
 package com.pk.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,35 +26,39 @@ public class UserController {
 
 	@Autowired
 	UserServices userService;
-	
+
 	@PostMapping("/register/create")
-	public ResponseEntity<BaseDto> register(@RequestBody UserMaster user){
+	public ResponseEntity<BaseDto> register(@RequestBody UserMaster user) {
 		BaseDto baseDto = new BaseDto();
 		baseDto = userService.registor(user);
 		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
-	} 
-	
+	}
+
 	@GetMapping("/get/id/{distributerId}")
-	public ResponseEntity<BaseDto> getById(@PathVariable("distributerId") String distributerId){
+	public ResponseEntity<BaseDto> getById(@PathVariable("distributerId") String distributerId) {
 		BaseDto baseDto = new BaseDto();
 		baseDto = userService.getById(distributerId);
 		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
-	} 
-	
-	
+	}
+
 	@PostMapping("/login")
-	public ResponseEntity<BaseDto> login(@RequestBody UserMaster userMaster){
+	public ResponseEntity<BaseDto> login(@RequestBody UserMaster userMaster, HttpServletRequest request) {
 		BaseDto baseDto = new BaseDto();
-		baseDto = userService.login(userMaster);
+		baseDto = userService.login(userMaster, request);
 		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
-	} 
-	
-	
+	}
+
+	@GetMapping("/logout")
+	public void logout(HttpServletRequest request) {
+		log.info("Logout method is called.");
+		userService.logout(request);
+	}
+
 	@PutMapping("/update")
-	public ResponseEntity<BaseDto> updateUser(@RequestBody UserMaster user){
+	public ResponseEntity<BaseDto> updateUser(@RequestBody UserMaster user) {
 		BaseDto baseDto = new BaseDto();
 		baseDto = userService.updateUser(user);
 		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
-	} 
-	
+	}
+
 }

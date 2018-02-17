@@ -3,6 +3,7 @@ package com.pk.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
@@ -38,11 +40,13 @@ public class UserMaster implements Serializable {
 	String confirmPassword;
 	String photo;
     String email;
+    @NotNull
     String mobileNumber;
     String optionalMobileNumber;
     @Enumerated(EnumType.STRING)
     UserType userType=UserType.customer;
     
+    @Column(name="distributer_id", unique=true)
     String distributerId;
   //this is distributerId who referred 
     String sponsorID;
@@ -53,7 +57,9 @@ public class UserMaster implements Serializable {
     //Personal Detail
     String fathersName;
     
-    Date dateOfBirth;
+    String dobMonth;
+    String dobYear;
+    String dobDay;
     
     String state;
     
@@ -84,7 +90,9 @@ public class UserMaster implements Serializable {
     String paymentType;
     String paytmNumber;
     
-    Date purchaseDate;
+    String purchaseDay;
+    String purchaseMonth;
+    String purchaseYear;
     String packageName;
     String designation;
     
@@ -94,8 +102,13 @@ public class UserMaster implements Serializable {
     String status;
     Date createdDate;
     Date modifiedDate;
+    
+    @Transient
+    String sessionId;
+
     @Version
     Long version;
+    
     
 	
 }

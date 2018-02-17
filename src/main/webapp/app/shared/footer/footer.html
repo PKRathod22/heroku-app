@@ -1,4 +1,4 @@
-<footer id="footer">
+<footer id="footer" ng-controller="mainCtrl">
  
 		<div class="container">
    <div class="row">
@@ -10,8 +10,8 @@
         </h4>
         <div class="menu-course">
           <ul class="menu">
-            <li><a href="#">
-                List of Technology 
+            <li><a ng-if="userLogged=='true'" href="javascript:void(0)" ng-click="logout()">
+                Logout
               </a>
             </li>
             <li><a href="#">
@@ -42,10 +42,6 @@
             </li>
             <li><a href="#">
                 Business Plans
-              </a>
-            </li>
-            <li><a href="#">
-                Free Trial
               </a>
             </li>
             <li><a href="#">
@@ -115,12 +111,12 @@
 					<div class="col-md-6 panel">
 						<div class="panel-body">
 							<p class="simplenav">
-								<a href="index.html">Home</a> | 
-								<a href="about.html">About</a> |
-								<a href="courses.html">Courses</a> |
-								<a href="price.html">Price</a> |
-								<a href="videos.html">Videos</a> |
-								<a href="contact.html">Contact</a>
+								<a href="#">Home</a> | 
+								<a href="#">About</a> |
+								<a href="#">Courses</a> |
+								<a href="#">Price</a> |
+								<a href="#">Videos</a> |
+								<a href="#">Contact</a>
 							</p>
 						</div>
 					</div>
@@ -128,7 +124,7 @@
 					<div class="col-md-6 panel">
 						<div class="panel-body">
 							<p class="text-right">
-								Copyright &copy; 2014. Template by <a href="http://webthemez.com/" rel="develop">WebThemez.com</a>
+								Copyright &copy; 2014. Template by <a href="#" rel="develop">flywin.com</a>
 							</p>
 						</div>
 					</div>

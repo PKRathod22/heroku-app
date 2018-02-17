@@ -21,11 +21,27 @@
 			});
 		});
 		
+		app.factory("UpdateUser", function($resource) {
+			return $resource("/user/update", {}, {
+				update : {
+					method : 'PUT'
+				}
+			});
+		});
+		
 		
 		app.factory("LoginUser", function($resource) {
 			return $resource("/user/login", {}, {
 				get : {
 					method : 'POST'
+				}
+			});
+		});
+		
+		app.factory("UserLogout", function($resource) {
+			return $resource("/user/logout", {}, {
+				get : {
+					method : 'GET',
 				}
 			});
 		});

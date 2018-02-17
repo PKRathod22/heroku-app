@@ -14,3 +14,17 @@
 	    height: 55px;
     width: 223px;
 }
+.flywin-loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 50%;
+  height: 50%;
+  z-index: 9999;
+  background: url(../images/loader.gif) center no-repeat #fff;
+}
+.line {
+	border-bottom: 6px solid #57c4d0
+}
+
+

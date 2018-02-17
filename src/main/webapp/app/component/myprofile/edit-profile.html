@@ -1,0 +1,185 @@
+<header id="head" class="secondary">
+	<div class="container">
+		<h1>Edit Profile</h1>
+	</div>
+</header>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			</br>
+			<h2 class="line">My Information</h2>
+			<form class="form-light mt-20" role="form">
+				<div class="row">
+					<div class="col-md-4">
+						<label>Distributer ( User Id )</label> <input ng-disabled="true"
+							class="form-control" ng-model="authUser.distributerId">
+
+					</div>
+					<div class="col-md-4">
+						<label>Sponser Id</label> <input ng-disabled="true"
+							class="form-control" ng-model="authUser.sponsorID">
+
+					</div>
+					<div class="col-md-4">
+						<label>Position</label> <input ng-disabled="true"
+							class="form-control" ng-model="authUser.legPosition">
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Full Name</label> <input class="form-control"
+								ng-disabled="true" ng-model="authUser.userName">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Primary Mobile Number</label> <input class="form-control"
+								ng-disabled="true" maxlength="10"
+								ng-model="authUser.mobileNumber">
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Secondary Mobile Number</label> <input
+								class="form-control" maxlength="10"
+								ng-model="authUser.optionalMobileNumber">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Email Id</label> <input class="form-control"
+								maxlength="20" placeholder="myname@mail.com"
+								ng-model="authUser.email">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Date Of Birth</label> <input type="text"
+								class="form-control" ng-model="authUser.dateOfBirth">
+						</div>
+					</div>
+				</div>
+
+				<h2 class="line">Address Details</h2>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>State</label> <input class="form-control" maxlength="20"
+								ng-model="authUser.state">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>District</label> <input type="text" class="form-control"
+								maxlength="20" ng-model="authUser.district">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>City</label> <input class="form-control" maxlength="20"
+								ng-model="authUser.city">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Pincode</label> <input class="form-control" maxlength="6"
+								ng-model="authUser.pincode">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<label>Address</label>
+						<textarea rows="4" cols="50" ng-model="authUser.address ">
+
+                                 </textarea>
+					</div>
+				</div>
+
+				<h2 class="line">Nominee Details</h2>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Nominee Name</label> <input class="form-control"
+								maxlength="20" ng-model="authUser.nomineeName">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Relation with Nominee</label> <input class="form-control"
+								maxlength="6" ng-model="authUser.relation">
+						</div>
+					</div>
+				</div>
+
+				<h2 class="line">Bank Account
+					Details</h2>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Account Number</label> <input class="form-control"
+								maxlength="20" ng-model="authUser.accountNo">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Bank Name</label> <input class="form-control"
+								maxlength="20" ng-model="authUser.bankName">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>IFSC Code</label> <input class="form-control"
+								maxlength="20" ng-model="authUser.ifscCode">
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+				<button type="submit" class="btn btn-two"  ng-click="updateUserProfile()">
+					<i class="fa fa-check"></i> Update
+				</button>
+				<p>
+					<br />
+				</p>
+			</form>
+		</div>
+		<!-- <div class="col-md-4">
+						<div class="row">
+							<div class="col-md-6">
+								<h3 class="section-title">Office Address</h3>
+								<div class="contact-info">
+									<h5>Address</h5>
+									<p>5th Street, Carl View - United States</p>
+									
+									<h5>Email</h5>
+									<p>info@webthemez.com</p>
+									
+									<h5>Phone</h5>
+									<p>+09 123 1234 123</p>
+								</div>
+							</div> 
+						</div> 						
+					</div> -->
+	</div>
+</div>

@@ -1,8 +1,13 @@
 package com.pk.services;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.pk.exception.ErrorCode;
@@ -21,7 +26,10 @@ public class UserServices {
 	@Autowired
 	UserRepository userRepository;
 	
-	public BaseDto login(UserMaster user){
+	@Value("${session.timeout}")
+	int sessionTimeout;
+	
+	public BaseDto login(UserMaster user,HttpServletRequest request){
 		BaseDto baseDto = new BaseDto();
 		try {
 			if(user!=null && user.getDistributerId()!=null && user.getPassword() !=null){
@@ -30,6 +38,11 @@ public class UserServices {
 			    	log.info("not valid user");
 			    	throw new RestException(ErrorCode.FAILED);
 			    }
+			    HttpSession session = request.getSession(true);
+				session.setMaxInactiveInterval(sessionTimeout);
+
+			    existingUser.setSessionId(session.getId());
+				
 			    baseDto.setResponseContent(existingUser);
 			    baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			}
@@ -64,7 +77,7 @@ public class UserServices {
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			log.info("register successfully");
 		} catch (Exception e) {
-			baseDto.setErrorDescription(e.getMessage());
+			baseDto.setErrorDescription(ErrorCode.FAILED);
 			log.error("found exception in register",e);
 		}
 		return baseDto;
@@ -72,7 +85,16 @@ public class UserServices {
 	
 	public BaseDto updateUser(UserMaster user){
 		BaseDto baseDto = new BaseDto();
-		userRepository.save(user);
+		try {
+			log.info("User object : "+user);
+			UserMaster updateUser=	userRepository.save(user);
+			baseDto.setErrorDescription(ErrorCode.SUCCESS);
+			baseDto.setResponseContent(updateUser);
+			log.info("user updated successfully of Distribute Id : "+updateUser.getDistributerId());
+		} catch (Exception e) {
+			baseDto.setErrorDescription(ErrorCode.FAILED);
+			log.error("found exception in update user details",e);
+		}
 		return baseDto;
 	}
 	public BaseDto getAll(){
@@ -88,6 +110,25 @@ public class UserServices {
 		}
 		return baseDto;
 		
+	}
+
+	
+	public void logout(HttpServletRequest request){
+
+		log.debug("Logout Method is Invoked");
+
+		HttpSession session = request.getSession(false);
+
+		if (session != null) {
+
+			session.setAttribute("LOGOUTSTATUS", "USER_LOGOUT");
+
+			session.invalidate();
+
+		} else {
+
+			log.debug("Session is already invalidated");
+		}
 	}
 	
 }

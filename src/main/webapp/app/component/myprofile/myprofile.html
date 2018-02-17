@@ -1,0 +1,38 @@
+<div ng-controller="MyProfileCtrl">
+	<header id="head" class="secondary">
+		<div class="container">
+			<h1>
+				<a href="javascriit:void(0)" style="color: #fcfdff;"
+					ng-click="loginTab()">My Profile</a>
+			</h1>
+		</div>
+	</header>
+
+	<div class="container">
+	<div class="row">
+  <h2 class="line">Personal Details</h2>
+  <table class="table table-bordered" >
+      <tr>
+        <th>Distributor Id</th>
+        <td>{{authUser.distributerId}}</th>
+      </tr>
+      <tr>
+        <th>Distributer Name</th>
+        <td>{{authUser.userName}}</td>
+      </tr>
+      <tr>
+        <th>Date of Purchase</th>
+        <td>{{authUser.purchaseDate}}</td>
+      </tr>
+      <tr>
+        <th>Email Id</th>
+        <td>{{authUser.email}}</td>
+      </tr>
+      <tr>
+        <th>Sponser Id</th>
+        <td>{{authUser.sponsorID}}</td>
+      </tr>
+  </table>
+</div>
+</div>
+</div>
