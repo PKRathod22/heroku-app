@@ -14,7 +14,8 @@
   <table class="table table-bordered" >
       <tr>
         <th>Distributor Id</th>
-        <td>{{authUser.distributerId}}</th>
+        <td>{{authUser.distributerId}}  <h4>Account Status :</h4>
+          <strong> <spam ng-model="myColor" ng-style="{color: myColor}" >{{authUser.status}}</spam></strong></th>
       </tr>
       <tr>
         <th>Distributer Name</th>
@@ -29,8 +30,8 @@
         <td>{{authUser.email}}</td>
       </tr>
       <tr>
-        <th>Sponser Id</th>
-        <td>{{authUser.sponsorID}}</td>
+        <th>Sponser Id / Sponser Name</th>
+        <td>{{authUser.sponsorID}} / {{authUser.mySponserName}}</td>
       </tr>
   </table>
 </div>

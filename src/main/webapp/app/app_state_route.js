@@ -4,7 +4,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
-	
+
 	.state('layout', {
 		templateUrl : 'mainLayout.html'
 	})
@@ -17,7 +17,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller : 'dashboardCtrl',
 		templateUrl : 'app/component/dashboard/dashboard.html'
 	})
-	
+
 	.state('layout.login', {
 		url : '/login',
 		controller : 'mainCtrl',
@@ -79,30 +79,28 @@ app
 							"$stateChangeStart",
 							function(event, toState, toParams, fromState,
 									fromParams) {
-								
+
 								$rootScope.userLogged = localStorage.authorized;
 
-								
-								
+								if (($rootScope.userLogged == "true" || $rootScope.userLogged == true)
+										&& toState.name === "layout.login") {
+									event.preventDefault();
+									$state.go(toState.name);
+									return;
+								}
+
 								if (($rootScope.userLogged == "false" || $rootScope.userLogged == false)
 										&& (toState.name === "layout.myprofile" || toState.name === "layout.editUser")) {
-									$location.path('/')
+									$location.path('/home')
 									return;
 								}
-								
-								
-								if (($rootScope.userLogged == "true" || $rootScope.userLogged == true)
-										&& toState.name === "layout.myprofile") {
-									$state.go('layout.myprofile');
+								 
+
+								if ($rootScope.userLogged == "false"
+										|| $rootScope.userLogged == false || $rootScope.userLogged==undefined) {
+									$state.go('layout.home');
 									return;
 								}
-								
-								if (($rootScope.userLogged == "true" || $rootScope.userLogged == true)
-										&& toState.name === "layout.editUser") {
-									$state.go('layout.editUser');
-									return;
-								}
-								
 
 							});
 			$rootScope.$on('$stateChangeSuccess', function(event, toState,

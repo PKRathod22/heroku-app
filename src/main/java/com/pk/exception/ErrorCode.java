@@ -12,6 +12,7 @@ public class ErrorCode {
 	public static final String EMAIL_NOTNULL = "email is mandatory";
 	public static final String MOBILE_NOTNULL = "mobile is mandatory";
 	public static final String SIGNUP_FAILED = "your account is not created. ";
+	public static final String CANNOT_UPDATE_LOCKED_RECORD="Record is being updated by another user. Try after sometime.";
 
 
 	

@@ -83,6 +83,15 @@ app.controller('MyProfileCtrl',function($scope,$state,$rootScope,Notification,Up
   			if (data.errorDescription =="ERR0"){
   				console.log("Successfully  getting user distrbuter id.", data)
   				$scope.authUser = data.responseContent;
+  				
+  				if($scope.authUser.status=='INPROGRESS'){
+  					$scope.myColor='#ffb100';
+  				}
+  				if($scope.authUser.status=='BLOCKED'){
+  					$scope.myColor='#ff2d29';
+  				}if($scope.authUser.status=='ACTIVE'){
+  					$scope.myColor='#0cb90c';
+  				}
   			}else{
   				Notification.error('failed.');
   			}

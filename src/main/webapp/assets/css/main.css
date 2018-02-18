@@ -26,5 +26,7 @@
 .line {
 	border-bottom: 6px solid #57c4d0
 }
-
+.required {
+	color : #ff2d29;
+}
 

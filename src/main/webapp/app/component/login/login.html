@@ -18,7 +18,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>User Id</label> <input  id="userId" class="form-control" maxlength="10"
+								<label>User Id<span class="required"> &nbsp*</span></label> <input  id="userId" class="form-control" maxlength="10"
 									placeholder="User Id" ng-model="userMaster.distributerId"/>
 									<div class="client-error">
 							<span ng-show="errorMap.get('userId')!=null"> <small>{{errorMap.get('userId')}}</small>
@@ -28,7 +28,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Password</label> <input id="password" type="password" maxlength="50"
+								<label>Password<span class="required"> &nbsp*</span></label> <input id="password" type="password" maxlength="50"
 									class="form-control" placeholder="Your password"
 									ng-model="userMaster.password">
 									<div class="client-error">
@@ -53,7 +53,7 @@
 					<div class="row">
 					<div class="col-md-6">
 					
-						<label>Name<span style="color: red"> &nbsp*</span></label> <input
+						<label>Name<span class="required"> &nbsp*</span></label> <input
 							id="name" class="form-control" placeholder="Your name"
 							ng-model="userMaster.userName" />
 						<div class="client-error">
@@ -64,7 +64,7 @@
 						
 						<div class="col-md-4">
 							<div class="form-group">
-								<label>Phone<span style="color: red"> &nbsp*</span></label> <input type="text" maxlength="10"
+								<label>Phone<span class="required"> &nbsp*</span></label> <input type="text" maxlength="10"
 									class="form-control" placeholder="+91-"
 									ng-model="userMaster.mobileNumber">
 									<div class="client-error">
@@ -74,7 +74,7 @@
 							</div>
 						</div>
 						<div class="col-md-2">
-					<label>Gender<span style="color: red"> &nbsp*</span></label> 
+					<label>Gender<span class="required"> &nbsp*</span></label> 
 							<select 
 							   class="form-control"
 							   ng-model="userMaster.gender" 
@@ -88,7 +88,7 @@
 					<div class="row">
 					<div class="col-md-6">
 							<div class="form-group">
-								<label>Password<span style="color: red"> &nbsp*</span></label> <input type="password" class="form-control" maxlength="50"
+								<label>Password<span class="required"> &nbsp*</span></label> <input type="password" class="form-control" maxlength="50"
 									placeholder="Your password" ng-model="userMaster.password">
 									<div class="client-error">
 							<span ng-show="errorMap.get('password')!=null"> <small>{{errorMap.get('password')}}</small>

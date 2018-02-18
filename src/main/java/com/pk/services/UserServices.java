@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import com.pk.exception.ErrorCode;
@@ -75,6 +76,7 @@ public class UserServices {
 		BaseDto baseDto = new BaseDto();
 		log.info("register start");
 		try {
+			user.setStatus("INPROGRESS");
 			user.setCreatedDate(new Date());
 			userRepository.save(user);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
@@ -95,7 +97,10 @@ public class UserServices {
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			baseDto.setResponseContent(updateUser);
 			log.info("user updated successfully of Distribute Id : "+updateUser.getDistributerId());
-		} catch (Exception e) {
+		} catch (ObjectOptimisticLockingFailureException e) {
+			log.error("Exception in  -> saveOrUpdate method ", e);
+			baseDto.setErrorDescription(ErrorCode.CANNOT_UPDATE_LOCKED_RECORD);
+		}catch (Exception e) {
 			baseDto.setErrorDescription(ErrorCode.FAILED);
 			log.error("found exception in update user details",e);
 		}
