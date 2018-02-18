@@ -3,7 +3,7 @@ app.controller('MyProfileCtrl',function($scope,$state,$rootScope,Notification,Up
 	var userMaster = {};
 	
 	
-	$scope.months = ["Month","1", "2", "3","4","5","6","7","8","9","10","11","12"];
+	$scope.months = ["Month","JAN", "FEB", "MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 	$scope.days = ["Day","1", "2", "3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29",
 	              "30","31"];
 
@@ -50,7 +50,9 @@ app.controller('MyProfileCtrl',function($scope,$state,$rootScope,Notification,Up
 			$state.go('layout.editUser',{id:id});
 		}
 	
-	
+	$scope.signUp = function(id){
+		console.log('signup  pressed ::::::- '+id);	
+	}
 	
 	$scope.updateUserProfile = function(){
 		console.log('update user details..');
@@ -92,6 +94,7 @@ app.controller('MyProfileCtrl',function($scope,$state,$rootScope,Notification,Up
   				}if($scope.authUser.status=='ACTIVE'){
   					$scope.myColor='#0cb90c';
   				}
+  				 $scope.lastLoginDate = new Date($scope.authUser.currentLoginDate).toDateString();
   			}else{
   				Notification.error('failed.');
   			}

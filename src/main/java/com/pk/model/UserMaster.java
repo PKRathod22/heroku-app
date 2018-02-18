@@ -57,7 +57,7 @@ public class UserMaster implements Serializable {
     
     //Personal Detail
     String fathersName;
-    
+    String qualification;
     String dobMonth;
     String dobYear;
     String dobDay;
@@ -74,10 +74,12 @@ public class UserMaster implements Serializable {
     
     String nomineeName;
     String relation;
+    String nomineeAge;
     
     //Bank Detail
     
     String accountNo;
+    String branchName;
     String bankName;
     String ifscCode;
     String panNo;
@@ -101,6 +103,7 @@ public class UserMaster implements Serializable {
     
     Date currentLoginDate;
     String status;
+    Boolean paymentStatus = false;
     Date createdDate;
     Date modifiedDate;
     

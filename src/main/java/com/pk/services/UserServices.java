@@ -82,14 +82,14 @@ public class UserServices {
 		if (user.getUserName() != null) {
 			String fullName = user.getUserName();
 			String firstTwo = fullName.substring(0, 2);
-			SequenceConfig sequenceConfig = sequenceRepository.findBySequenceName("GEN_DISTRIBUTED_ID");
+			SequenceConfig sequenceConfig = sequenceRepository.findBySequenceName(SequenceName.GEN_DISTRIBUTED_ID.toString());
 			if (sequenceConfig == null) {
 				log.error("sequence is null");
 				throw new RestException(ErrorCode.FAILED);
 			}
 			sequenceConfig.setCurrentValue(sequenceConfig.getCurrentValue() + 1);
 			sequenceRepository.save(sequenceConfig);
-			String generateddistributeId = String.format("%s%03d", firstTwo.toUpperCase().trim(),
+			String generateddistributeId = String.format("%s%04d", firstTwo.toUpperCase().trim(),
 					sequenceConfig.getCurrentValue());
 			log.info(" Distributed ID Generated Code ::  " + generateddistributeId);
 			user.setDistributerId(generateddistributeId);
@@ -97,12 +97,24 @@ public class UserServices {
 
 	}
 	
+	public void validateNewJoinee(UserMaster user) {
+		if (user.getSponsorID() == null) {
+			user.setDesignation("NEW JOINEE");
+			user.setStatus("BLOCKED");
+		} else if (user.getDistributerId() != null && user.getSponsorID() != null)
+			user.setDesignation("REFERAL JOINEE");
+		if (user.getPaymentStatus() !=null && user.getPaymentStatus() == true)
+			user.setStatus("ACTIVE");
+		else
+			user.setStatus("INPROGRESS");
+		user.setCreatedDate(new Date());
+	}
+
 	public BaseDto registor(UserMaster user){
 		BaseDto baseDto = new BaseDto();
 		log.info("register start");
 		try {
-			user.setStatus("INPROGRESS");
-			user.setCreatedDate(new Date());
+			validateNewJoinee(user);
 			generateDistributerId(user);
 			userRepository.save(user);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
@@ -119,6 +131,11 @@ public class UserServices {
 		try {
 			log.info("User object : "+user);
 			user.setModifiedDate(new Date());
+			if(user.getId()!=null && user.getDistributerId() !=null){
+				UserMaster exsistUser = userRepository.findByDistributerId(user.getDistributerId());
+				if(exsistUser.getVersion()!=null)
+				user.setVersion(exsistUser.getVersion());
+			}
 			UserMaster updateUser=	userRepository.save(user);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			baseDto.setResponseContent(updateUser);

@@ -10,27 +10,31 @@
 
 	<div class="container">
 	<div class="row">
-  <h2 class="line">Personal Details</h2>
-  <table class="table table-bordered" >
+  <h2 class="line">Account Details</h2>Last Login Date  &nbsp: &nbsp<span style="color:#0a0aff"> {{lastLoginDate}}</span>
+  <table class="table table-bordered" style="width=400;">
       <tr>
-        <th>Distributor Id</th>
+        <th>Distributor Id &nbsp:</th>
         <td>{{authUser.distributerId}}  <h4>Account Status :</h4>
           <strong> <spam ng-model="myColor" ng-style="{color: myColor}" >{{authUser.status}}</spam></strong></th>
       </tr>
       <tr>
-        <th>Distributer Name</th>
+        <th>Designation &nbsp:</th>
+        <td>{{authUser.designation}}</td>
+      </tr>
+      <tr>
+        <th>Distributer Name &nbsp:</th>
         <td>{{authUser.userName}}</td>
       </tr>
       <tr>
-        <th>Date of Purchase</th>
+        <th>Date of Purchase &nbsp:</th>
         <td>{{authUser.purchaseDate}}</td>
       </tr>
       <tr>
-        <th>Email Id</th>
+        <th>Email Id &nbsp:</th>
         <td>{{authUser.email}}</td>
       </tr>
       <tr>
-        <th>Sponser Id / Sponser Name</th>
+        <th>Sponser Id / Sponser Name &nbsp:</th>
         <td>{{authUser.sponsorID}} / {{authUser.mySponserName}}</td>
       </tr>
   </table>
