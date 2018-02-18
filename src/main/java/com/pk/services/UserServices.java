@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 import com.pk.exception.ErrorCode;
 import com.pk.exception.RestException;
 import com.pk.model.BaseDto;
+import com.pk.model.SequenceConfig;
+import com.pk.model.SequenceName;
 import com.pk.model.UserMaster;
+import com.pk.repositoy.SequenceRepository;
 import com.pk.repositoy.UserRepository;
 
 import lombok.extern.log4j.Log4j;
@@ -26,6 +29,9 @@ public class UserServices {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	SequenceRepository sequenceRepository;
 	
 	@Value("${session.timeout}")
 	int sessionTimeout;
@@ -72,12 +78,32 @@ public class UserServices {
 		return baseDto;
 	}
 	
+	public void generateDistributerId(UserMaster user) {
+		if (user.getUserName() != null) {
+			String fullName = user.getUserName();
+			String firstTwo = fullName.substring(0, 2);
+			SequenceConfig sequenceConfig = sequenceRepository.findBySequenceName("GEN_DISTRIBUTED_ID");
+			if (sequenceConfig == null) {
+				log.error("sequence is null");
+				throw new RestException(ErrorCode.FAILED);
+			}
+			sequenceConfig.setCurrentValue(sequenceConfig.getCurrentValue() + 1);
+			sequenceRepository.save(sequenceConfig);
+			String generateddistributeId = String.format("%s%03d", firstTwo.toUpperCase().trim(),
+					sequenceConfig.getCurrentValue());
+			log.info(" Distributed ID Generated Code ::  " + generateddistributeId);
+			user.setDistributerId(generateddistributeId);
+		}
+
+	}
+	
 	public BaseDto registor(UserMaster user){
 		BaseDto baseDto = new BaseDto();
 		log.info("register start");
 		try {
 			user.setStatus("INPROGRESS");
 			user.setCreatedDate(new Date());
+			generateDistributerId(user);
 			userRepository.save(user);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			log.info("register successfully");

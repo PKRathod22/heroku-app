@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Table
 @Entity
+@Data
 public class SequenceConfig implements Serializable {
 	
 	private static final long serialVersionUID = 145277345670055400L;
