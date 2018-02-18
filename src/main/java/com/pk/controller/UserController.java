@@ -28,24 +28,18 @@ public class UserController {
 	UserServices userService;
 
 	@PostMapping("/register/create")
-	public ResponseEntity<BaseDto> register(@RequestBody UserMaster user) {
-		BaseDto baseDto = new BaseDto();
-		baseDto = userService.registor(user);
-		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
+	public BaseDto register(@RequestBody UserMaster user) {
+		return userService.registor(user);
 	}
 
 	@GetMapping("/get/id/{distributerId}")
-	public ResponseEntity<BaseDto> getById(@PathVariable("distributerId") String distributerId) {
-		BaseDto baseDto = new BaseDto();
-		baseDto = userService.getById(distributerId);
-		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
+	public BaseDto getById(@PathVariable("distributerId") String distributerId) {
+		return userService.getById(distributerId);
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<BaseDto> login(@RequestBody UserMaster userMaster, HttpServletRequest request) {
-		BaseDto baseDto = new BaseDto();
-		baseDto = userService.login(userMaster, request);
-		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
+	public BaseDto login(@RequestBody UserMaster userMaster, HttpServletRequest request) {
+		return userService.login(userMaster, request);
 	}
 
 	@GetMapping("/logout")
@@ -55,10 +49,8 @@ public class UserController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<BaseDto> updateUser(@RequestBody UserMaster user) {
-		BaseDto baseDto = new BaseDto();
-		baseDto = userService.updateUser(user);
-		return new ResponseEntity<BaseDto>(baseDto, HttpStatus.OK);
+	public BaseDto updateUser(@RequestBody UserMaster user) {
+		return userService.updateUser(user);
 	}
 
 }

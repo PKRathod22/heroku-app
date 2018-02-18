@@ -38,6 +38,8 @@ public class UserServices {
 			    	log.info("not valid user");
 			    	throw new RestException(ErrorCode.FAILED);
 			    }
+			    existingUser.setCurrentLoginDate(new Date());
+			    userRepository.save(existingUser);
 			    HttpSession session = request.getSession(true);
 				session.setMaxInactiveInterval(sessionTimeout);
 
@@ -48,7 +50,7 @@ public class UserServices {
 			}
 		} catch (Exception e) {
 			 baseDto.setErrorDescription(ErrorCode.FAILED);
-           log.error("error found while login");
+           log.error("error found while login",e);
 		}
 		return baseDto;
 	}
@@ -63,7 +65,7 @@ public class UserServices {
 		    baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			log.info("user master getbyid successfully");
 		} catch (Exception e) {
-			baseDto.setErrorDescription(e.getMessage());
+			baseDto.setErrorDescription(ErrorCode.FAILED);
 			log.error("found exception in user master getby id",e);
 		}
 		return baseDto;
@@ -73,6 +75,7 @@ public class UserServices {
 		BaseDto baseDto = new BaseDto();
 		log.info("register start");
 		try {
+			user.setCreatedDate(new Date());
 			userRepository.save(user);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			log.info("register successfully");
@@ -87,6 +90,7 @@ public class UserServices {
 		BaseDto baseDto = new BaseDto();
 		try {
 			log.info("User object : "+user);
+			user.setModifiedDate(new Date());
 			UserMaster updateUser=	userRepository.save(user);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			baseDto.setResponseContent(updateUser);

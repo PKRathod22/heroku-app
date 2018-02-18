@@ -40,6 +40,7 @@ public class UserMaster implements Serializable {
 	String confirmPassword;
 	String photo;
     String email;
+    String gender;
     @NotNull
     String mobileNumber;
     String optionalMobileNumber;

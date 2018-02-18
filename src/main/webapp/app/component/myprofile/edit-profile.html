@@ -57,11 +57,27 @@
 								ng-model="authUser.email">
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Date Of Birth</label> <input type="text"
-								class="form-control" ng-model="authUser.dateOfBirth">
-						</div>
+					<div>
+					<div class="col-md-2">
+							<label>Date Of Birth</label> 
+							<select 
+							   class="form-control"
+							   ng-model="authUser.dobDay" 
+							   ng-options="item for item in days"></select>
+					</div>
+					<div class="col-md-2">
+					<label>Month</label> 
+							<select 
+							   class="form-control"
+							   ng-model="authUser.dobMonth" 
+							   ng-options="item for item in months"></select>
+					</div>
+					<div class="col-md-2">
+					<label>Year</label> 
+							<input  placeholder="Year"
+							   class="form-control"
+							   ng-model="authUser.dobYear" />
+					</div>
 					</div>
 				</div>
 

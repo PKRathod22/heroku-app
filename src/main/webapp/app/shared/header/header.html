@@ -1,4 +1,4 @@
-<div ng-controller="headerCtrl" class="navbar navbar-inverse">
+<div ng-controller="MyProfileCtrl" class="navbar navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
 			<!-- Button for smallest screens -->
@@ -34,9 +34,9 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown">Account <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="javascript:void(0)" ng-click="myprofile()">My
+						<li><a href="javascript:void(0)" ng-click="myprofile(authUser.distributerId)">My
 								Profile</a></li>
-						<li><a href="javascript:void(0)" ng-click="editProfile()">Edit
+						<li><a href="javascript:void(0)" ng-click="editProfile(authUser.distributerId)">Edit
 								Profile</a></li>
 						<li><a href="javascript:void(0)"
 							ng-click="logout()">Logout</a></li>

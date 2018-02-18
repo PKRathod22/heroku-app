@@ -754,8 +754,8 @@ nav#filter a.current {
 	/*background: #3d84e6;*/
 	background-size: cover;
 	text-align: center; 
-    padding:10px 0;
-	height: 140px; 
+    padding:0px 0;
+	height: 89px; 
 }
 #head.secondary h1{ 
     COLOR: #fff;

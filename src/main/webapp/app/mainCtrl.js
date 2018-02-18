@@ -1,6 +1,7 @@
 app.controller('mainCtrl',function($scope, $state, $window ,$rootScope, $timeout,$location,$stateParams ,Notification,UserLogout,ObjService,RegisterUser,UserGetById,LoginUser){
 console.log('called main..');
 
+$scope.gender = ["Male","Female"];
 $scope.errorMap = new Map();
    $scope.userMaster = {};
    $scope.loginFlag = true;
@@ -18,49 +19,43 @@ $scope.errorMap = new Map();
 	   $scope.userMaster = {};
 	   $scope.errorMap = new Map();;
    }
+   
+   $scope.validateRegister = function(){
+	   $scope.errorMap = new Map();
+		
+	   if( $scope.userMaster!=null &&  $scope.userMaster.userName == null){
+			$scope.errorMap.put('userName', "required");
+			return false;
+		}if( $scope.userMaster!=null &&  $scope.userMaster.mobileNumber == null){
+			$scope.errorMap.put('mobileNumber', "required");
+			return false;
+		}if( $scope.userMaster!=null &&  $scope.userMaster.gender == null){
+			$scope.errorMap.put('gender', "required");
+			return false;
+		}if( $scope.userMaster!=null &&  $scope.userMaster.password == null){
+			$scope.errorMap.put('password', "required");
+			return false;
+		}
+		return true;
+   }
 	$scope.register=function(){
 		console.log('register called..');
-		$scope.errorMap = new Map();
-		if( $scope.userMaster!=null &&  $scope.userMaster.userName == null){
-			$scope.errorMap.put('userName', "name is required");
-			$rootScope.navigateToNextField('name');
-			return;
-		}
 		
-		
-		RegisterUser.save($scope.userMaster).$promise.then(function(data){
-			if(data.errorDescription=="ERR0"){
-				$scope.loginTab();
-				Notification.success('thanks for registeration you are welcome !');
-			}
-			else{
+		if($scope.validateRegister()){
+			RegisterUser.save($scope.userMaster).$promise.then(function(data){
+				if(data.errorDescription=="ERR0"){
+					$scope.loginTab();
+					Notification.success('thanks for registeration you are welcome !');
+				}
+				else{
+					Notification.error(data.responseDescription);	
+				}
+			},function(error){
+				if(data.responseDescription!=null)
 				Notification.error(data.responseDescription);	
-			}
-		},function(error){
-			if(data.responseDescription!=null)
-			Notification.error(data.responseDescription);	
-			$log.info("newProducts Saving Failed : " ,error);
-		});
-	}
-	
-   
-   $scope.getById = function(id) {
-		console.log("getById ", id);
-		
-		UserGetById.get({
-  			id : id
-  		}, function(data) {
-  			if (data.responseCode =="ERR0"){
-  				console.log("Successfully  getting user distrbuter id.", data)
-  				$scope.userMaster = data.responseObject;
-  			}else{
-  				Notification.error('user id or password is wrong !');
-  			}
-  			
-  		}, function(error) {
-  			console.log("Error while getting user distruter id.", error)
-  		});
-		
+				$log.info("newProducts Saving Failed : " ,error);
+			});
+		}
 	}
 	
    
@@ -78,8 +73,8 @@ $scope.errorMap = new Map();
 	                localStorage.setItem('authUser', JSON.stringify($rootScope.authUser));
 	               // ObjService.set($rootScope.authUser);
 	                //location.href = '/index.html';
-	                var obj ={};
-					$state.go('layout.myprofile',{ obj : $rootScope.authUser});
+	                var id = $rootScope.authUser.distributerId;
+					$state.go('layout.myprofile',{ id : id});
 				}
 				else{
 					Notification.error('user id or password is wrong !');	
@@ -99,8 +94,9 @@ $scope.errorMap = new Map();
 	   UserLogout.get(function(data) {
 		   localStorage.authUser = null;
 		   localStorage.authorized=false;
+		   $rootScope.authUser = null;
 		   $window.location.reload();
-		  // $location.path('/');		   
+		   $location.path('/home');		   
 		   
 	   });
 	}
@@ -126,7 +122,7 @@ $scope.errorMap = new Map();
 	
 	$rootScope.back = function() {
 		console.log(" back to home....!");
-		 $location.path('/')
+		 $location.path('/home')
 	}
 		
 		
@@ -141,22 +137,12 @@ $scope.errorMap = new Map();
 		})
      }
 
-	$scope.view = function(id){
-		$scope.getById(id);
-	}
 	
-	switch ($stateParams.action) {
-	case "view":
-		console.log("My profile View Page", $stateParams.id);
-		$rootScope.unfinishedData = undefined;
+	 $rootScope.stateEventMap = new Map();
+	 $rootScope.stateEventMap.put("layout.editUser", "editUserEvent");
+	 $rootScope.stateEventMap.put("layout.myprofile", "viewUserEvent");
 
-		if ($stateParams.id != undefined && $stateParams.id != null) {
-			$scope.view($stateParams.id);
-		}
 		
 		
-		break;
-	default:
-	}
 
 });

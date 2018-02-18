@@ -1,4 +1,4 @@
-<div>
+<div >
 	<header id="head" class="secondary">
 		<div class="container">
 			<h1>
@@ -39,7 +39,7 @@
 						</div>
 					</div>
 
-					<button type="submit" class="btn btn-two" ng-click="login()">Sign In</button>
+					<button type="submit" class="btn btn-two" ng-click="login()">Log In</button>
 					<p>
 						<br />
 					</p>
@@ -62,19 +62,38 @@
 						</div>
 						</div>
 						
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
-								<label>Phone</label> <input type="text" maxlength="10"
-									class="form-control" placeholder="Phone number"
+								<label>Phone<span style="color: red"> &nbsp*</span></label> <input type="text" maxlength="10"
+									class="form-control" placeholder="+91-"
 									ng-model="userMaster.mobileNumber">
+									<div class="client-error">
+							<span ng-show="errorMap.get('mobileNumber')!=null"> <small>{{errorMap.get('mobileNumber')}}</small>
+							</span>
+						</div>
 							</div>
 						</div>
+						<div class="col-md-2">
+					<label>Gender<span style="color: red"> &nbsp*</span></label> 
+							<select 
+							   class="form-control"
+							   ng-model="userMaster.gender" 
+							   ng-options="item for item in gender"></select>
+							   <div class="client-error">
+							<span ng-show="errorMap.get('gender')!=null"> <small>{{errorMap.get('gender')}}</small>
+							</span>
+						</div>
+					</div>
 					</div>
 					<div class="row">
 					<div class="col-md-6">
 							<div class="form-group">
-								<label>Password</label> <input type="password" class="form-control" maxlength="50"
+								<label>Password<span style="color: red"> &nbsp*</span></label> <input type="password" class="form-control" maxlength="50"
 									placeholder="Your password" ng-model="userMaster.password">
+									<div class="client-error">
+							<span ng-show="errorMap.get('password')!=null"> <small>{{errorMap.get('password')}}</small>
+							</span>
+						</div>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -100,6 +119,9 @@
                 </p>
                  make bond strong with strong source development 				
 			</div>
-		</div>
+			
+ <a href="javascript:void(0)" ng-click="back()" ><i class="fa fa-chevron-circle-left" ></i> Back to Home	</a>		
+					</div>
 	</div>
-</div>
+	</div>
+	</html>
