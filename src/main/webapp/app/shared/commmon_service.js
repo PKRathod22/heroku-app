@@ -13,3 +13,29 @@ app.factory('ObjService', function() {
  }
 
 });
+
+app.service('CommonService',function(){
+	
+	 this.isObjectEmpty = function(obj) {
+		    for(var prop in obj) {
+		        if(obj.hasOwnProperty(prop))
+		            return false;
+		    }
+		    return JSON.stringify(obj) === JSON.stringify({});
+		}
+	
+	 this.years = function(startYear) {
+         var currentYear = new Date().getFullYear(), years = [];
+         startYear = startYear || 1980;
+
+         while ( startYear <= currentYear ) {
+                 years.push(startYear++);
+         } 
+         console.log('typeoftypeoftypeoftypeof:::'+typeof years);
+         console.log('typeoftypeoftypeoftypeof:::'+years);
+
+         return years;
+ }
+	 
+	 
+});

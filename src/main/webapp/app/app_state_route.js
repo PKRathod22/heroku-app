@@ -6,22 +6,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider
 
 	.state('layout', {
-		templateUrl : 'mainLayout.html'
+		templateUrl : '/mainLayout.html'
 	})
 
 	.state('layout.home', {
-		url : '/home',
+		url : '/',
 		params : {
 			obj : null
 		},
 		controller : 'dashboardCtrl',
-		templateUrl : 'app/component/dashboard/dashboard.html'
+		templateUrl : '/app/component/dashboard/dashboard.html'
 	})
 
 	.state('layout.login', {
 		url : '/login',
 		controller : 'mainCtrl',
-		templateUrl : 'app/component/login/login.html'
+		templateUrl : '/app/component/login/login.html'
 	})
 
 	.state('layout.about', {
@@ -56,7 +56,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			action : "edit"
 		},
 		controller : 'MyProfileCtrl',
-		templateUrl : 'app/component/myprofile/edit-profile.html'
+		templateUrl : '/app/component/myprofile/edit-profile.html'
 	})
 
 	.state('layout.myprofile', {
@@ -66,8 +66,26 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			action : "view"
 		},
 		controller : 'MyProfileCtrl',
-		templateUrl : 'app/component/myprofile/myprofile.html'
+		templateUrl : '/app/component/myprofile/myprofile.html'
 	})
+	
+	.state('layout.signup', {
+		url : '/signup',
+		params : {
+			id : null,
+			action : "signup"
+		},
+		controller : 'MyProfileCtrl',
+		templateUrl : '/app/component/myprofile/signup-profile.html'
+	})
+	
+	.state('layout.recentjoin', {
+		url : '/recentuser',
+		controller : 'MyProfileCtrl',
+		templateUrl : '/app/component/myprofile/recent-registered.html'
+	})
+	
+	
 
 });
 
@@ -82,7 +100,9 @@ app
 
 								$rootScope.userLogged = localStorage.authorized;
 
-								if (($rootScope.userLogged == "true" || $rootScope.userLogged == true)
+								
+								
+								/*if (($rootScope.userLogged == "true" || $rootScope.userLogged == true)
 										&& toState.name === "layout.login") {
 									event.preventDefault();
 									$state.go(toState.name);
@@ -90,17 +110,14 @@ app
 								}
 
 								if (($rootScope.userLogged == "false" || $rootScope.userLogged == false)
-										&& (toState.name === "layout.myprofile" || toState.name === "layout.editUser")) {
+										&& (toState.name === "layout.myprofile" 
+											|| toState.name === "layout.editUser")) {
 									$location.path('/home')
 									return;
 								}
-								 
+								 */
 
-								if ($rootScope.userLogged == "false"
-										|| $rootScope.userLogged == false || $rootScope.userLogged==undefined) {
-									$state.go('layout.home');
-									return;
-								}
+								
 
 							});
 			$rootScope.$on('$stateChangeSuccess', function(event, toState,

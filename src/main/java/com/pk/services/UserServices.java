@@ -104,10 +104,9 @@ public class UserServices {
 		} else if (user.getDistributerId() != null && user.getSponsorID() != null){
 			user.setDesignation("REFERAL JOINEE");
 		    user.setStatus("INPROGRESS");			
-		}
-
-		if (user.getPaymentStatus() !=null && user.getPaymentStatus() == true)
+		}if (user.getPaymentStatus() !=null && user.getPaymentStatus() == true){
 			user.setStatus("ACTIVE");
+		}
 		user.setCreatedDate(new Date());
 	}
 
@@ -153,13 +152,14 @@ public class UserServices {
 	public BaseDto getAll(){
 		BaseDto baseDto = new BaseDto();
 		try{
-		 List<UserMaster> userList = userRepository.findAll();
+		 List<UserMaster> userList = userRepository.getAllById();
 		 log.info("user master list "+userList);
 		 baseDto.setResponseContents(userList);
+		baseDto.setErrorDescription(ErrorCode.SUCCESS);
 		 baseDto.setTotalRecords(userList.size());
 		}catch(Exception e){
-			log.error("found eror in user : [",e);
-			baseDto.setErrorDescription("failed");
+			log.error("found eror in getall user List: [",e);
+			baseDto.setErrorDescription(ErrorCode.FAILED);
 		}
 		return baseDto;
 		

@@ -1,7 +1,19 @@
-app.controller('mainCtrl',function($scope, $state, $window ,$rootScope, $timeout,$location,$stateParams ,Notification,UserLogout,ObjService,RegisterUser,UserGetById,LoginUser){
+app.controller('mainCtrl',function($scope, $state, $window ,$rootScope, $timeout,$location,$stateParams, CommonService, Notification,UserLogout,ObjService,RegisterUser,UserGetById,LoginUser){
 console.log('called main..');
 
-$scope.gender = ["Male","Female"];
+$rootScope.gender = ["Male","Female"];
+
+$rootScope.months = [ "Month", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL",
+      			"AUG", "SEP", "OCT", "NOV", "DEC" ];
+$rootScope.days = [ "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+      			"11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21",
+      			"22", "23", "24", "25", "26", "27", "28", "29", "30", "31" ];
+
+$rootScope.years = CommonService.years(1970);
+
+$rootScope.legPostion = ["Left","Right"];
+$rootScope.status =["ACTIVE","BLOCK","INPROGRESS"];
+
 $scope.errorMap = new Map();
    $scope.userMaster = {};
    $scope.loginFlag = true;
@@ -11,13 +23,14 @@ $scope.errorMap = new Map();
 	   $scope.registerFlag = true; 
 	   $scope.loginFlag = false;
 	   $scope.userMaster = {};
+	   $scope.errorMap = new Map();;
    }
    
    $scope.loginTab = function(){
 	   $scope.loginFlag = true;
 	   $scope.registerFlag = false;
 	   $scope.userMaster = {};
-	   $scope.errorMap = new Map();;
+	   $scope.errorMap = new Map();
    }
    
    $scope.validateRegister = function(){
@@ -38,6 +51,9 @@ $scope.errorMap = new Map();
 		}
 		return true;
    }
+   
+      
+   
 	$scope.register=function(){
 		console.log('register called..');
 		
@@ -74,7 +90,12 @@ $scope.errorMap = new Map();
 	               // ObjService.set($rootScope.authUser);
 	                //location.href = '/index.html';
 	                var id = $rootScope.authUser.distributerId;
-					$state.go('layout.myprofile',{ id : id});
+	                
+	                if($rootScope.authUser.userType=='admin'&& $rootScope.authUser.status=='ACTIVE'){
+						$state.go('layout.signup',{ id : id});
+	                }else{
+	                	$state.go('layout.myprofile',{ id : id});
+	                }
 				}
 				else{
 					Notification.error('user id or password is wrong !');	
@@ -106,12 +127,10 @@ $scope.errorMap = new Map();
 	   
 	   if($scope.userMaster.distributerId==null){
 		   $scope.errorMap.put('userId', "user id required");
-			$rootScope.navigateToNextField('userId'); 
 			 return false;
 	   }
 	   if($scope.userMaster.password==null){
 		   $scope.errorMap.put('password', "password id required");
-			$rootScope.navigateToNextField('password');
 			 return false;
 	   }
 	   return true;
@@ -141,8 +160,13 @@ $scope.errorMap = new Map();
 	 $rootScope.stateEventMap = new Map();
 	 $rootScope.stateEventMap.put("layout.editUser", "editUserEvent");
 	 $rootScope.stateEventMap.put("layout.myprofile", "viewUserEvent");
+	 $rootScope.stateEventMap.put("layout.signup", "signupUserEvent");
 
-		
-		
+
+	
+	 
+	 
+	 
+	 
 
 });

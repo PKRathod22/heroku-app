@@ -25,14 +25,19 @@ public class UserController {
 	@Autowired
 	UserServices userService;
 
-	@PostMapping("/register/create")
-	public BaseDto register(@RequestBody UserMaster user) {
-		return userService.registor(user);
+	@GetMapping("/get/all")
+	public BaseDto getAll() {
+		return userService.getAll();
 	}
-
+	
 	@GetMapping("/get/id/{distributerId}")
 	public BaseDto getById(@PathVariable("distributerId") String distributerId) {
 		return userService.getById(distributerId);
+	}
+	
+	@PostMapping("/register/create")
+	public BaseDto register(@RequestBody UserMaster user) {
+		return userService.registor(user);
 	}
 
 	@PostMapping("/login")

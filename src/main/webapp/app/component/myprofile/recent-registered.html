@@ -1,0 +1,41 @@
+<div ng-controller="MyProfileCtrl">
+	<header id="head" class="secondary">
+		<div class="container">
+			<h1>
+				<a href="javascriit:void(0)" style="color: #fcfdff;"
+					>Recent Registered User</a>
+			</h1>
+		</div>
+	</header>
+
+	<div class="container">
+	<div class="row">
+	<h2 class="line">User List :</h2>
+  <table  class="table table-bordered" style="width=400;">
+      <tr>
+      <th>SNo.</th>
+      <th>Distributer Id</th>
+      <th>Name</th>
+      <th>Sponser ID</th>
+      <th>Gender</th>
+      <th>Mobile No</th>
+      <th>Status</th>
+      </tr>
+     
+      <tr ng-repeat ="data in recentUserList track by $index">
+      <td>{{$index+1}}</td>
+      <td>{{data.distributerId}}</td>
+      <td>{{data.userName}}</td>
+      <td>{{data.sponserID}}</td>
+       <td>{{data.gender}}</td>
+        <td>{{data.mobileNumber}}</td>
+         <td ng-style="{color: statusColor}" >{{data.status}}</td>
+      
+      </tr>
+      
+      
+      
+  </table>
+</div>
+</div>
+</div>

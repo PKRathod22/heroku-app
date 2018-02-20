@@ -12,6 +12,16 @@
 			});
 		});
 		
+		app.factory("GetAllRecentUser", function($resource) {
+			return $resource("/user/get/all", {}, {
+				get : {
+					method : 'GET',
+					isArray : false
+				}
+			});
+		});
+		
+		
 		
 		app.factory("RegisterUser", function($resource) {
 			return $resource("/user/register/create", {}, {

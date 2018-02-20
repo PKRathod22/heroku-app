@@ -1,43 +1,84 @@
 <header id="head" class="secondary">
 	<div class="container">
-		<h1>Edit Profile</h1>
+		<h1>Secured Sign Up By Super Admin</h1>
 	</div>
 </header>
 <div class="container">
+<div class="row">
+							<div class="col-md-6">
+								<h3 class="section-title"></h3>
+								<button type="submit" class="btn btn-two"  ng-click="fetchByDistributerId(signUpUser.distributerId)">
+					<i class="fa fa-refresh"></i> Fetch Result
+				</button>
+							</div> 
+						</div> 
 	<div class="row">
 		<div class="col-md-8">
 			</br>
-			<h2 class="line">My Information</h2>
+			<h2 class="line">New Registration</h2>
 			<form class="form-light mt-20" role="form">
 				<div class="row">
-					<div class="col-md-4">
-						<label>Distributer ( User Id )</label> <input ng-disabled="true"
-							class="form-control" ng-model="authUser.distributerId">
+				<div class="col-md-4">
+						<label>Distributer Id</label> <input 
+							class="form-control" ng-model="signUpUser.distributerId">
 
 					</div>
 					<div class="col-md-4">
-						<label>Sponser Id</label> <input ng-disabled="true"
-							class="form-control" ng-model="authUser.sponsorID">
+						<label>Sponser Id</label> <input 
+							class="form-control" ng-model="signUpUser.sponserID">
+					</div>
+					<div class="col-md-2">
+						<label>Position</label> 
+						<select 
+							   class="form-control"
+							   ng-model="signUpUser.legPosition" 
+							   ng-options="item for item in legPostion"></select>
 
 					</div>
-					<div class="col-md-4">
-						<label>Position</label> <input ng-disabled="true"
-							class="form-control" ng-model="authUser.legPosition">
-
+					<div class="col-md-2">
+					<label>Gender<span class="required"> &nbsp*</span></label> 
+							<select 
+							   class="form-control"
+							   ng-model="signUpUser.gender" 
+							   ng-options="item for item in gender"></select>
+							   <div class="client-error">
+							<span ng-show="errorMap.get('gender')!=null"> <small>{{errorMap.get('gender')}}</small>
+							</span>
+						</div>
 					</div>
+					
 				</div>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>Full Name</label> <input class="form-control"
-								ng-disabled="true" ng-model="authUser.userName">
+								 ng-model="signUpUser.userName">
 						</div>
 					</div>
-					<div class="col-md-4">
+					
+										
+					<div class="col-md-2">
+					<label>Status<span class="required"> &nbsp*</span></label> 
+							<select 
+							   class="form-control"
+							   ng-model="signUpUser.status" 
+							   ng-options="item for item in status"></select>
+							   <div class="client-error">
+							<span ng-show="errorMap.get('status')!=null"> <small>{{errorMap.get('status')}}</small>
+							</span>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+				
+				<div class="row">
+				    <div class="col-md-4">
 						<div class="form-group">
 							<label>Primary Mobile Number</label> <input class="form-control"
-								ng-disabled="true" maxlength="10"
-								ng-model="authUser.mobileNumber">
+								 maxlength="10"
+								ng-model="signUpUser.mobileNumber">
 						</div>
 					</div>
 
@@ -45,16 +86,18 @@
 						<div class="form-group">
 							<label>Secondary Mobile Number</label> <input
 								class="form-control" maxlength="10"
-								ng-model="authUser.optionalMobileNumber">
+								ng-model="signUpUser.optionalMobileNumber">
 						</div>
 					</div>
+				
 				</div>
+				
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Email Id</label> <input class="form-control"
 								maxlength="20" placeholder="myname@mail.com"
-								ng-model="authUser.email">
+								ng-model="signUpUser.email">
 						</div>
 					</div>
 					<div>
@@ -62,22 +105,22 @@
 							<label>Date Of Birth</label> 
 							<select 
 							   class="form-control"
-							   ng-model="authUser.dobDay" 
+							   ng-model="signUpUser.dobDay" 
 							   ng-options="item for item in days"></select>
 					</div>
 					<div class="col-md-2">
 					<label>Month</label> 
 							<select 
 							   class="form-control"
-							   ng-model="authUser.dobMonth" 
+							   ng-model="signUpUser.dobMonth" 
 							   ng-options="item for item in months"></select>
 					</div>
 					<div class="col-md-2">
-					<label>Year</label>
+					<label>Year</label> 
 					<select 
 							   class="form-control"
-							   ng-model="authUser.dobYear"
-							   ng-options="item for item in years"></select> 
+							   ng-model="signUpUser.dobYear"
+							   ng-options="item for item in years"></select>
 							
 					</div>
 					</div>
@@ -89,13 +132,13 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>State</label> <input class="form-control" maxlength="20"
-								ng-model="authUser.state">
+								ng-model="signUpUser.state">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>District</label> <input type="text" class="form-control"
-								maxlength="20" ng-model="authUser.district">
+								maxlength="20" ng-model="signUpUser.district">
 						</div>
 					</div>
 				</div>
@@ -104,20 +147,20 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>City</label> <input class="form-control" maxlength="20"
-								ng-model="authUser.city">
+								ng-model="signUpUser.city">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Pincode</label> <input class="form-control" maxlength="6"
-								ng-model="authUser.pincode">
+								ng-model="signUpUser.pincode">
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<label>Address</label>
-						<textarea rows="4" cols="50" ng-model="authUser.address ">
+						<textarea rows="4" cols="50" ng-model="signUpUser.address ">
 
                                  </textarea>
 					</div>
@@ -129,13 +172,13 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Nominee Name</label> <input class="form-control"
-								maxlength="20" ng-model="authUser.nomineeName">
+								maxlength="20" ng-model="signUpUser.nomineeName">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Relation with Nominee</label> <input class="form-control"
-								maxlength="6" ng-model="authUser.relation">
+								maxlength="6" ng-model="signUpUser.relation">
 						</div>
 					</div>
 				</div>
@@ -147,19 +190,19 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Account Number</label> <input class="form-control"
-								maxlength="20" ng-model="authUser.accountNo">
+								maxlength="20" ng-model="signUpUser.accountNo">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Bank Name</label> <input class="form-control"
-								maxlength="20" ng-model="authUser.bankName">
+								maxlength="20" ng-model="signUpUser.bankName">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>IFSC Code</label> <input class="form-control"
-								maxlength="20" ng-model="authUser.ifscCode">
+								maxlength="20" ng-model="signUpUser.ifscCode">
 						</div>
 					</div>
 				</div>
@@ -174,30 +217,23 @@
 
 
 
-				<button type="submit" class="btn btn-two"  ng-click="updateUserProfile()">
-					<i class="fa fa-check"></i> Update
+				<button type="submit" class="btn btn-two"  ng-click="register()">
+					<i class="fa fa-check"></i> Register
 				</button>
 				<p>
 					<br />
 				</p>
 			</form>
 		</div>
-		<!-- <div class="col-md-4">
+		 <!-- <div class="col-md-4">
 						<div class="row">
 							<div class="col-md-6">
-								<h3 class="section-title">Office Address</h3>
-								<div class="contact-info">
-									<h5>Address</h5>
-									<p>5th Street, Carl View - United States</p>
-									
-									<h5>Email</h5>
-									<p>info@webthemez.com</p>
-									
-									<h5>Phone</h5>
-									<p>+09 123 1234 123</p>
-								</div>
+								<h3 class="section-title"></h3>
+								<button type="submit" class="btn btn-two"  ng-click="fetchByDistributerId(signUpUser.distributerId)">
+					<i class="fa fa-refresh"></i> Fetch Result
+				</button>
 							</div> 
 						</div> 						
-					</div> -->
+					</div>  -->
 	</div>
 </div>
