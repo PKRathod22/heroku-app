@@ -69,14 +69,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl : '/app/component/myprofile/myprofile.html'
 	})
 	
-	.state('layout.signup', {
-		url : '/signup',
+	.state('layout.approve', {
+		url : '/approve',
 		params : {
 			id : null,
-			action : "signup"
+			action : "approve"
 		},
 		controller : 'MyProfileCtrl',
-		templateUrl : '/app/component/myprofile/signup-profile.html'
+		templateUrl : '/app/component/myprofile/approval-profile.html'
 	})
 	
 	.state('layout.recentjoin', {
@@ -85,7 +85,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl : '/app/component/myprofile/recent-registered.html'
 	})
 	
-	
+	.state('layout.mydownline', {
+		url : '/downline',
+		params : {
+			id : null
+		},
+		controller : 'MyProfileCtrl',
+		templateUrl : '/app/component/myprofile/downline-list.html'
+	})
 
 });
 

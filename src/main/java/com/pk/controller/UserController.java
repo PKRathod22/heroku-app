@@ -56,4 +56,9 @@ public class UserController {
 		return userService.updateUser(user);
 	}
 
+	@GetMapping("/get/mydownline/{distributerId}")
+	public BaseDto getDownLineUser(@PathVariable("distributerId") String distributerId) {
+		return userService.getDownLineUser(distributerId);
+	}
+	
 }

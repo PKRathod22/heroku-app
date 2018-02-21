@@ -1,5 +1,5 @@
 <div ng-controller="MyProfileCtrl" class="navbar navbar-inverse">
-	<div class="container">
+	<div class="w3-container">
 		<div class="navbar-header">
 			<!-- Button for smallest screens -->
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -28,46 +28,65 @@
 
 			</ul>
 		</div>
-		<div ng-if="authUser.id!=null && authUser.userType!='admin' " class="navbar-collapse collapse">
+		<div ng-if="authUser.id!=null && authUser.userType!='admin' "
+			class="navbar-collapse collapse">
 			<ul class="nav navbar-nav pull-right mainNav">
 				<li><a href="javascript:void(0)" ng-click="price()">Price</a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown">Account <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="javascript:void(0)" ng-click="myprofile(authUser.distributerId)">My
-								Profile</a></li>
-						<li><a href="javascript:void(0)" ng-click="editProfile(authUser.distributerId)">Edit
-								Profile</a></li>
 						<li><a href="javascript:void(0)"
-							ng-click="logout()">Logout</a></li>
+							ng-click="myprofile(authUser.distributerId)">My Profile</a></li>
+						<li><a href="javascript:void(0)"
+							ng-click="editProfile(authUser.distributerId)">Edit Profile</a></li>
+
 					</ul></li>
+					
+					<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown">Team Member <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0)"
+							ng-click="mydownline(authUser.distributerId)">My Downline</a></li>
+
+					</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown">My Income <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0)"
+							>Weekely Incentive </a></li>
+							<li><a href="javascript:void(0)"
+							>HighestEarn of the week</a></li>
+
+					</ul></li>
+					
+				<li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
 				<li><p ng-if="authUser.id!=null" href="javascript:void(0)">Hi
 						{{authUser.userName}}!</p></li>
 
 			</ul>
 		</div>
 
-
-    <div  ng-if="authUser.userType=='admin' && authUser.id!=null" class="navbar-collapse collapse">
+		<div ng-if="authUser.userType=='admin' && authUser.status=='ACTIVE'"
+			class="navbar-collapse collapse">
 			<ul class="nav navbar-nav pull-right mainNav">
-				
-				<li><a href="javascript:void(0)" ng-click="signuUp(authUser.distributerId)">Sign Up
-								</a></li>
+
+				<li><a href="javascript:void(0)"
+					ng-click="approval(authUser.distributerId)">Approve </a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown">User Details<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="javascript:void(0)" ng-click="recentRegisteredList()" >Recent Registered</a></li>
-						<li><a href="javascript:void(0)" >Assign ID</a></li>
+						<li><a href="javascript:void(0)"
+							ng-click="recentRegisteredList()">Recent Registered</a></li>
+						<li><a href="javascript:void(0)">Assign ID</a></li>
 					</ul></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown">Account <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="javascript:void(0)" ng-click="myprofile(authUser.distributerId)">Admin
-								Profile</a></li>
-						<li><a href="javascript:void(0)" ng-click="editProfile(authUser.distributerId)">Edit
-								Profile</a></li>
 						<li><a href="javascript:void(0)"
-							ng-click="logout()">Logout</a></li>
+							ng-click="myprofile(authUser.distributerId)">Admin Profile</a></li>
+						<li><a href="javascript:void(0)"
+							ng-click="editProfile(authUser.distributerId)">Edit Profile</a></li>
+						<li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
 					</ul></li>
 				<li><p ng-if="authUser.id!=null" href="javascript:void(0)">Hi
 						{{authUser.userName}}!</p></li>

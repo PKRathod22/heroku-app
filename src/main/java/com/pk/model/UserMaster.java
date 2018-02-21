@@ -61,6 +61,7 @@ public class UserMaster implements Serializable {
     String dobMonth;
     String dobYear;
     String dobDay;
+    String maritalStatus;
     
     String state;
     
@@ -97,6 +98,8 @@ public class UserMaster implements Serializable {
     String purchaseMonth;
     String purchaseYear;
     String packageName;
+    String packageMrp;
+    String topupDate;
     String designation;
     
     Double earnAmount;

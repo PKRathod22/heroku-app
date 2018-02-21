@@ -19,4 +19,7 @@ public interface UserRepository extends JpaRepository<UserMaster, Long> {
 	@Query(nativeQuery=true,value="select * from user_master order by id desc")
 	List<UserMaster> getAllById();
 	
+	@Query(nativeQuery=true,value="select * from user_master where sponsorid=?1 order by id desc")
+	List<UserMaster> getDownlineById(String distributerId);
+	
 }

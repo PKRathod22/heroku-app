@@ -1,0 +1,98 @@
+<header id="head" class="secondary">
+	<div class="container">
+		<h1>Approval By Super Admin</h1>
+	</div>
+</header>
+<div class="container">
+<div class="row">
+							<div class="col-md-6">
+								<h3 class="section-title"></h3>
+								<button type="submit" class="btn btn-two"  ng-click="fetchByDistributerId(signUpUser.distributerId)">
+					<i class="fa fa-refresh"></i> Fetch Result
+				</button>
+							</div> 
+						</div> 
+	<div class="row">
+		<div class="col-md-8">
+			</br>
+			<h2 class="line">Registered User</h2>
+			<form class="form-light mt-20" role="form">
+				<div class="row">
+				<div class="col-md-4">
+						<label>Distributer Id</label> <input 
+							class="form-control" ng-model="signUpUser.distributerId">
+
+					</div>
+					<div class="col-md-4">
+						<label>Sponser Id</label>
+						 <p  class="form-control"
+							 >{{signUpUser.sponsorID}}</p>
+					</div>
+					
+					
+					<div class="col-md-4">
+					<label>Status<span class="required"> &nbsp*</span></label> 
+							<select 
+							   class="form-control btn-1"
+							   ng-model="signUpUser.status" 
+							   ng-style="{'background-color':myColor}"
+							   ng-change="onchangeStatus()"
+							   onfocus='if(this.options.length > 8){ this.size = 8; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'
+							   ng-options="item for item in status"></select>
+							   <div class="client-error">
+							<span ng-show="errorMap.get('status')!=null"> <small>{{errorMap.get('status')}}</small>
+							</span>
+						</div>
+					</div>
+					
+					
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Full Name</label> <p class="form-control"
+								 >{{signUpUser.userName}}</p>
+						</div>
+					</div>
+					
+						<div class="col-md-2">
+						<label>Position</label> 
+						<p  class="form-control" >{{signUpUser.legPosition}}</p>
+
+					</div>
+					<div class="col-md-2">
+					<label>Gender</label> 
+					<p class="form-control"
+							  >{{signUpUser.gender}}</p>
+					</div>				
+					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Primary Mobile Number</label> <p class="form-control"
+								>{{signUpUser.mobileNumber}}</p>
+						</div>
+					</div>
+					
+				</div>
+				
+
+				<button type="submit" class="btn btn-two"  ng-click="updateStatus()">
+					<i class="fa fa-check"></i> Save & Continue
+				</button>
+				<p>
+					<br />
+				</p>
+			</form>
+		</div>
+		 <!-- <div class="col-md-4">
+						<div class="row">
+							<div class="col-md-6">
+								<h3 class="section-title"></h3>
+								<button type="submit" class="btn btn-two"  ng-click="fetchByDistributerId(signUpUser.distributerId)">
+					<i class="fa fa-refresh"></i> Fetch Result
+				</button>
+							</div> 
+						</div> 						
+					</div>  -->
+	</div>
+</div>

@@ -31,8 +31,6 @@ app.service('CommonService',function(){
          while ( startYear <= currentYear ) {
                  years.push(startYear++);
          } 
-         console.log('typeoftypeoftypeoftypeof:::'+typeof years);
-         console.log('typeoftypeoftypeoftypeof:::'+years);
 
          return years;
  }

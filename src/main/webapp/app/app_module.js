@@ -3,6 +3,7 @@ var app = angular.module("myApp",
         'ui.router',
         'ngResource',
         'ui-notification',
-        'ngStorage'
+        'ngStorage',
+        'angular-flexslider'
        
     ]);

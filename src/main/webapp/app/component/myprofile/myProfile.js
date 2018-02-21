@@ -1,5 +1,5 @@
 app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
-		Notification, UpdateUser, UserGetById, $stateParams,CommonService,GetAllRecentUser) {
+		Notification, UpdateUser, UserGetById, $stateParams,CommonService,GetAllRecentUser,GetDownlineUser) {
 
 	var userMaster = {};
 
@@ -41,7 +41,7 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 			id : id
 		});
 	}
-
+	
 	$scope.editProfile = function(id) {
 		console.log('edit profile pressed ::::::- ' + id);
 		$state.go('layout.editUser', {
@@ -49,9 +49,26 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 		});
 	}
 
+	$scope.mydownline  = function(id){
+		console.log('mydownline pressed ::::::- ' + id);
+		GetDownlineUser.get({id:id}).$promise.then(function(data) {
+			if (data.errorDescription == "ERR0") {
+				$rootScope.downlineUserList = data.responseContents;
+				console.log("getdownlineUser list :::::", $scope.downlineUserList);
+				$state.go('layout.mydownline', {
+					id : id
+				});
 
-	$scope.signuUp = function(){
-		$state.go('layout.signup');
+			}}, function(error) {
+			Notification.error("service-unavailable.");
+			console.error("exception found to downline user list !", error);
+		});
+
+	
+    }
+	
+	$scope.approval = function(){
+		$state.go('layout.approve');
 	}
 	
 	
@@ -84,13 +101,19 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 				$rootScope.recentUserList = data.responseContents;
 				console.log("recentUserList ", $scope.recentUserList);
 				if($scope.authUser !=null && $scope.authUser.status!=null){
-					if ($scope.authUser.status == 'INPROGRESS') {
-						$scope.myColor = '#ffb100';
-					}else if ($scope.authUser.status == 'BLOCKED') {
-						$scope.myColor = '#ff2d29';
-					}else if ($scope.authUser.status == 'ACTIVE') {
-						$scope.myColor = '#0cb90c';
-					}	
+					
+					angular.forEach($rootScope.recentUserList, function(value, index){
+						/*if (value.status == 'INPROGRESS') {
+							$rootScope.myColor = '#ffb100';
+						} if (value.status == 'BLOCKED') {
+							$rootScope.myColor = '#ff2d29';
+						}if (value.status == 'ACTIVE') {
+							$rootScope.myColor = '#0cb90c';
+						}*/
+					console.log('value ::::::::::::'+value+':::::index::::::::'+index)
+					   });
+					
+						
 				}
 				$state.go('layout.recentjoin');
 
@@ -132,8 +155,7 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 				}
 				
 				if($scope.authUser!=null && $scope.authUser.currentLoginDate!=null){
-					$scope.lastLoginDate = new Date(
-							$scope.authUser.currentLoginDate).toDateString();	
+					$scope.lastLoginDate = $rootScope.dateToString($scope.authUser.currentLoginDate);	
 				}
 				
 			} 
@@ -147,11 +169,37 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 			$scope.setOldDataVal();
 
 		}, function(error) {
+			Notification.error("service-unavailable.");
 			console.log("Error while getting user distruter id.", error)
 		});
 
 	}
 
+	$scope.updateStatus = function(){
+		$scope.userMaster = $scope.signUpUser;
+		UpdateUser.update($scope.userMaster).$promise.then(function(data){
+			if(data.errorDescription=="ERR0"){
+				Notification.success('Record updated successfully !');
+			}
+			else{
+				Notification.error('Record updation failed !');	
+			}
+		},function(error){
+			Notification.error("service-unavailable.");
+		});
+	
+	}
+	
+	$scope.onchangeStatus = function(){
+		if ($scope.signUpUser.status == 'INPROGRESS') {
+			$scope.myColor = '#ffb100';
+		}else if ($scope.signUpUser.status == 'BLOCKED') {
+			$scope.myColor = '#ff2d29';
+		}else if ($scope.signUpUser.status == 'ACTIVE') {
+			$scope.myColor = '#0cb90c';
+		}	
+	}
+	
 	$scope.setOldDataVal = function() {
 		$scope.oldData = JSON.stringify($scope.authUser);
 	}

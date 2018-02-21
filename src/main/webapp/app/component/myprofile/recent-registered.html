@@ -10,13 +10,31 @@
 
 	<div class="container">
 	<div class="row">
-	<h2 class="line">User List :</h2>
-  <table  class="table table-bordered" style="width=400;">
+	<h2 class="line"> {{recentUserList.length}} - Total User list:</h2>
+
+			<div class="row">
+
+				<div class="col-md-4">
+					<h3 class="section-title"></h3>
+					<button type="submit" class="btn btn-two" style="margin-top: -28px;"
+						ng-click="fetchByDistributerId(signUpUser.distributerId)">
+						<i class="fa fa-refresh"></i> Fetch Result
+					</button>
+				</div>
+
+				<div class="col-md-3">
+				 <input class="form-control" style=" margin-left: -184px;margin-top: 5px;" placeholder="Distributer Id"
+						ng-model="signUpUser.distributerId">
+
+				</div>
+			</div>
+			<table  class="table table-bordered" style="width=400;">
       <tr>
       <th>SNo.</th>
       <th>Distributer Id</th>
       <th>Name</th>
       <th>Sponser ID</th>
+      <th>Register Date</th>
       <th>Gender</th>
       <th>Mobile No</th>
       <th>Status</th>
@@ -26,10 +44,11 @@
       <td>{{$index+1}}</td>
       <td>{{data.distributerId}}</td>
       <td>{{data.userName}}</td>
-      <td>{{data.sponserID}}</td>
+      <td>{{data.sponsorID}}</td>
+      <td>{{dateToString(data.createdDate)}}</td>
        <td>{{data.gender}}</td>
         <td>{{data.mobileNumber}}</td>
-         <td ng-style="{color: statusColor}" >{{data.status}}</td>
+         <td ng-style="{'color': myColor}" >{{data.status}}</td>
       
       </tr>
       

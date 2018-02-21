@@ -12,6 +12,20 @@
 			});
 		});
 		
+		app.factory("GetDownlineUser", function($resource) {
+			return $resource("/user/get/mydownline/:id", {}, {
+				get : {
+					method : 'GET',
+					params : {
+						id : ''
+					},
+					isArray : false
+				}
+			});
+		});
+		
+		
+		
 		app.factory("GetAllRecentUser", function($resource) {
 			return $resource("/user/get/all", {}, {
 				get : {

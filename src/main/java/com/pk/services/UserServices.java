@@ -184,4 +184,21 @@ public class UserServices {
 		}
 	}
 	
+	public BaseDto getDownLineUser(String distributerId){
+		BaseDto baseDto  = new BaseDto();
+		try {
+			List<UserMaster>  downlineList =	userRepository.getDownlineById(distributerId);
+			baseDto.setErrorDescription(ErrorCode.SUCCESS);
+			baseDto.setResponseContents(downlineList);
+			log.info("Total siz eof downline"+downlineList.size());
+		} catch (Exception e) {
+			baseDto.setErrorDescription(ErrorCode.FAILED);
+			log.error("found exception while getting downline :::",e);
+		}
+		
+		return baseDto;
+	}
+	
+	
+	
 }
