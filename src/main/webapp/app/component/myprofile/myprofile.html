@@ -9,11 +9,11 @@
 
 	<div class="container">
 	<div class="row">
-  <h2 class="line">Account Details</h2>Last Login Date  &nbsp: &nbsp<span style="color:#0a0aff"> {{lastLoginDate}}</span>
+  <h2 class="line">Account Details </h2>Last Login Date  &nbsp: &nbsp<span style="color:#0a0aff"> {{lastLoginDate}}</span>
   <table class="table table-bordered" style="width=400;">
       <tr>
-        <th>Distributor Id &nbsp:</th>
-        <td>{{authUser.distributerId}}  <h4>Account Status :</h4>
+        <th style="width: 504px;">Distributor Id &nbsp:</th>
+        <td style="width: 504px;">{{authUser.distributerId}}  <h4>Account Status :</h4>
           <strong> <spam ng-model="myColor" ng-style="{color: myColor}" >{{authUser.status}}</spam></strong></th>
       </tr>
       <tr>
@@ -36,6 +36,13 @@
         <th>Sponser Id / Sponser Name &nbsp:</th>
         <td>{{authUser.sponsorID}} / {{authUser.mySponserName}}</td>
       </tr>
+      
+      <tr>
+        <th>Last Credited Amount &nbsp:</th>
+<!--         <td><b><h4> &#8377 &nbsp  3,000.00</h4></b></td>
+ -->      
+       <td><b><h4> &#8377 &nbsp  {{authUser.earnAmount}}</h4></b></td>
+        </tr>
   </table>
 </div>
 </div>
