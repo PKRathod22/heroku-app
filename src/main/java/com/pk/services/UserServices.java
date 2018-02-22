@@ -101,7 +101,7 @@ public class UserServices {
 		if (user.getSponsorID() == null) {
 			user.setDesignation("NEW JOINEE");
 			user.setStatus("BLOCKED");
-		} else if (user.getDistributerId() != null && user.getSponsorID() != null){
+		} else if (user.getSponsorID() != null){
 			user.setDesignation("REFERAL JOINEE");
 		    user.setStatus("INPROGRESS");			
 		}if (user.getPaymentStatus() !=null && user.getPaymentStatus() == true){

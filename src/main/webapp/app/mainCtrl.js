@@ -11,9 +11,10 @@ $rootScope.days = [ "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
 
 $rootScope.years = CommonService.years(1970);
 
+$rootScope.yesNo =["Yes","No"];
 $rootScope.legPostion = ["Left","Right"];
 $rootScope.status =["ACTIVE","BLOCKED","INPROGRESS"];
-
+$rootScope.legPosition = ["Left","Right"];
 $rootScope.dateToString = function(dateObj){
  return	new Date(dateObj).toDateString();
 }
@@ -58,18 +59,22 @@ $scope.errorMap = new Map();
    $scope.validateRegister = function(){
 	   $scope.errorMap = new Map();
 		
-	   if( $scope.userMaster!=null &&  $scope.userMaster.userName == null){
+	   if(  $scope.userMaster.userName == null){
 			$scope.errorMap.put('userName', "required");
 			return false;
-		}if( $scope.userMaster!=null &&  $scope.userMaster.mobileNumber == null){
+		}if( $scope.userMaster.mobileNumber == null){
 			$scope.errorMap.put('mobileNumber', "required");
 			return false;
-		}if( $scope.userMaster!=null &&  $scope.userMaster.gender == null){
+		}if( $scope.userMaster.gender == null){
 			$scope.errorMap.put('gender', "required");
 			return false;
-		}if( $scope.userMaster!=null &&  $scope.userMaster.password == null){
+		}if(  $scope.userMaster.password == null){
 			$scope.errorMap.put('password', "required");
 			return false;
+		}if($scope.userMaster.paymentStatus=='Yes'){
+			$scope.userMaster.paymentStatus = true;
+		}else{
+			$scope.userMaster.paymentStatus = false;
 		}
 		return true;
    }
