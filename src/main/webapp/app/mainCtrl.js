@@ -157,7 +157,7 @@ $scope.errorMap = new Map();
 			 return false;
 	   }
 	   if($scope.userMaster.password==null){
-		   $scope.errorMap.put('password', "password id required");
+		   $scope.errorMap.put('password', "password is required");
 			 return false;
 	   }
 	   return true;
