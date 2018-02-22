@@ -7,21 +7,21 @@
 				<span class="icon-bar"></span><span class="icon-bar"></span><span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand"> <img class="logo-img"
-				src="assets/images/logo.png" alt="Techro HTML5 template"></a>
+			<a class="navbar-brand"> <img class="logo-img" style="width: 232px; !important"
+				src="assets/images/logo.jpg" alt="Techro HTML5 template"></a>
 		</div>
 		<div ng-if="authUser.id==null" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav pull-right mainNav">
 				<li><a href="javascript:void(0)" ng-click="defaultDashboard()">Home</a></li>
 				<li><a href="javascript:void(0)" ng-click="about()">About</a></li>
 				<li><a href="javascript:void(0)" ng-click="courses()">Courses</a></li>
-				<li><a href="javascript:void(0)" ng-click="price()">Price</a></li>
+				<!-- <li><a href="javascript:void(0)" ng-click="price()">Price</a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown">Package <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="javascript:void(0)" ng-click="link1()">Lik1</a></li>
 						<li><a href="javascript:void(0)">Link2</a></li>
-					</ul></li>
+					</ul></li> -->
 				<li><a href="javascript:void(0)" ng-click="contact()">Contact</a></li>
 				<li><a ng-if="authUser.id==null" href="javascript:void(0)"
 					ng-click="login()">Login</a></li>
@@ -31,7 +31,6 @@
 		<div ng-if="authUser.id!=null && authUser.userType!='admin' "
 			class="navbar-collapse collapse">
 			<ul class="nav navbar-nav pull-right mainNav">
-				<li><a href="javascript:void(0)" ng-click="price()">Price</a></li>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown">Account <b class="caret"></b></a>
 					<ul class="dropdown-menu">
