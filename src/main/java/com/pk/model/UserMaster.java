@@ -29,7 +29,8 @@ public class UserMaster implements Serializable {
 	
 	private static final long serialVersionUID = -6513828693331958787L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	Long id;
 	
 	//Personal Detail
