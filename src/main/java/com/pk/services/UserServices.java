@@ -101,13 +101,17 @@ public class UserServices {
 		if (user.getSponsorID() == null) {
 			user.setDesignation("NEW JOINEE");
 			user.setStatus("BLOCKED");
-		}if(user.getSponsorID() !=null && user.getSponsorID().trim() != null || !user.getSponsorID().isEmpty()){
+		}else if(user!=null && user.getSponsorID() !=null && user.getSponsorID().trim() != null || !user.getSponsorID().isEmpty()){
 			user.setDesignation("REFERAL JOINEE");
 		    user.setStatus("INPROGRESS");
+		      UserMaster userDetail= userRepository.findByDistributerId(user.getSponsorID());
+		      if(userDetail==null || userDetail.getDistributerId()==null){
+		    	throw new RestException("Sponser Id doesn,t exist");  
+		      }
+		      user.setMySponserName(userDetail.getUserName());
 		}if(user.getPaymentStatus() !=null && user.getPaymentStatus() == true){
 			user.setStatus("ACTIVE");
 		}
-	    user.setMySponserName(user.getUserName());
 		user.setCreatedDate(new Date());
 	}
 
