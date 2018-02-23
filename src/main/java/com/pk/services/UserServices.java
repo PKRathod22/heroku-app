@@ -103,10 +103,11 @@ public class UserServices {
 			user.setStatus("BLOCKED");
 		}if(user.getSponsorID() !=null && user.getSponsorID().trim() != null || !user.getSponsorID().isEmpty()){
 			user.setDesignation("REFERAL JOINEE");
-		    user.setStatus("INPROGRESS");			
+		    user.setStatus("INPROGRESS");
 		}if(user.getPaymentStatus() !=null && user.getPaymentStatus() == true){
 			user.setStatus("ACTIVE");
 		}
+	    user.setMySponserName(user.getUserName());
 		user.setCreatedDate(new Date());
 	}
 
