@@ -10,28 +10,48 @@
 						
 						<form class="form-light mt-20" role="form">
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control" placeholder="Your name">
-							</div>
+								<label>Name<span class="required"> &nbsp*</span></label> 
+								<input maxlength="30" class="form-control" placeholder="Your name"
+						ng-model="userMessage.name">
+						<div class="client-error">
+							<span ng-show="errorMap.get('name')!=null"> <small>{{errorMap.get('name')}}</small>
+							</span>
+						</div>
+				</div>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>Email</label>
-										<input type="email" class="form-control" placeholder="Email address">
+										<label>Email<span class="required"> &nbsp*</span></label>
+										<input
+										 maxlength="30" ng-model="userMessage.email" class="form-control" placeholder="Email address">
+									<div class="client-error">
+							<span ng-show="errorMap.get('email')!=null"> <small>{{errorMap.get('email')}}</small>
+							</span>
+						</div>
+									
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>Phone</label>
-										<input type="text" class="form-control" placeholder="Phone number">
+										<label>Phone<span class="required"> &nbsp*</span></label>
+										<input ng-model="userMessage.phoneNumber" class="form-control" 
+										   maxlength="10" placeholder="Phone number">
+									<div class="client-error">
+							<span ng-show="errorMap.get('phone')!=null"> <small>{{errorMap.get('phone')}}</small>
+							</span>
+						</div>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label>Message</label>
-								<textarea class="form-control" id="message" placeholder="Write you message here..." style="height:100px;"></textarea>
+								<label>Message<span class="required"> &nbsp*</span></label>
+								<textarea class="form-control" maxlength="2000" ng-model="userMessage.message" placeholder="Write you message here..." style="height:100px;"></textarea>
 							</div>
-							<button type="submit" class="btn btn-two">SEND ENQUIRY</button><p><br/></p>
+							<div class="client-error">
+							<span ng-show="errorMap.get('message')!=null"> <small>{{errorMap.get('message')}}</small>
+							</span>
+						</div>
+							<button type="button" class="btn btn-two"  ng-click="sendEnquiry()">SEND ENQUIRY</button><p><br/></p>
 						</form>
 					</div>
 					<div class="col-md-4">

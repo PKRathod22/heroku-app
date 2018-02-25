@@ -1,5 +1,7 @@
 package com.pk.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class MessageServices {
 		BaseDto baseDto = new BaseDto();
 		try {
 			log.info("Message obj :::::"+message);
+			message.setCreatedDate(new Date());
 			userMessageRepository.save(message);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			log.info("Message send successfully :::::"+message);

@@ -2,7 +2,7 @@ app.controller('mainCtrl',function($scope, $state, $window ,$rootScope, $timeout
 console.log('called main..');
 
 $rootScope.gender = ["Male","Female"];
-
+$rootScope.genError ="service-unavailable"
 $rootScope.months = [ "Month", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL",
       			"AUG", "SEP", "OCT", "NOV", "DEC" ];
 $rootScope.days = [ "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",

@@ -18,12 +18,10 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Table(name="user_master")
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@ToString()
 @Data
 public class UserMaster implements Serializable {
 	

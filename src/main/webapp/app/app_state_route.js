@@ -46,6 +46,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	.state('layout.contact', {
 		url : '/contact',
+		controller : 'MessageCtrl',
 		templateUrl : '/contact.html'
 	})
 
