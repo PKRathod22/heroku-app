@@ -99,21 +99,23 @@ public class UserServices {
 	}
 	
 	public void validateNewJoinee(UserMaster user) {
-		if (user.getSponsorID() == null) {
+		if (user.getSponsorID().isEmpty() || user.getSponsorID() == null) {
 			user.setDesignation("NEW JOINEE");
 			user.setStatus("BLOCKED");
-		}else if(user!=null && user.getSponsorID() !=null && user.getSponsorID().trim() != null || !user.getSponsorID().isEmpty()){
+		}else if( !user.getSponsorID().isEmpty() || user.getSponsorID() !=null){
 			user.setDesignation("REFERAL JOINEE");
-			if(user.getPaymentStatus() !=null && user.getPaymentStatus() == false){
-				user.setStatus("BLOCKED");
-			}
-			user.setStatus("INPROGRESS");
 		      UserMaster userDetail= userRepository.findByDistributerId(user.getSponsorID());
-		      if(userDetail==null || userDetail.getDistributerId()==null){
+		      if(userDetail==null){
 		    	throw new RestException("Sponser Id doesn,t exist");  
 		      }
 		      user.setMySponserName(userDetail.getUserName());
 		}
+		if(user.getPaymentStatus() == true){
+			user.setStatus("ACTIVE");
+		}else{
+			user.setStatus("BLOCKED");	
+		}
+		
 		user.setCreatedDate(new Date());
 	}
 
