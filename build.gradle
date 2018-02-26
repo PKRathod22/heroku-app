@@ -42,7 +42,7 @@ dependencies {
   compile("org.postgresql:postgresql:9.3-1102-jdbc41")
   compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
   
-  compile('mysql:mysql-connector-java')
+  //compile('mysql:mysql-connector-java')
     
     compile('org.projectlombok:lombok:1.16.6')
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
