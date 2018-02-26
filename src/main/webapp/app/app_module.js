@@ -4,6 +4,7 @@ var app = angular.module("myApp",
         'ngResource',
         'ui-notification',
         'ngStorage',
-        'angular-flexslider'
+        'angular-flexslider',
+        'ngDialog'
        
     ]);

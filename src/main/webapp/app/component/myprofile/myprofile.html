@@ -25,8 +25,8 @@
         <td>{{authUser.userName}}</td>
       </tr>
       <tr>
-        <th>Date of Purchase &nbsp:</th>
-        <td>{{authUser.purchaseDate}}</td>
+        <th>Date of Joining &nbsp:</th>
+        <td>{{dateToString(authUser.createdDate) }}</td>
       </tr>
       <tr>
         <th>Email Id &nbsp:</th>
@@ -37,12 +37,12 @@
         <td>{{authUser.sponsorID}} / {{authUser.mySponserName}}</td>
       </tr>
       
-      <tr>
+   <!--   <tr>
         <th>Last Credited Amount &nbsp(INR):</th>
-<!--         <td><b><h4> &#8377 &nbsp  3,000.00</h4></b></td>
- -->      
+         <td><b><h4> &#8377 &nbsp  3,000.00</h4></b></td>
+      
        <td><b><h4> &#8377 &nbsp  {{authUser.earnAmount}}</h4></b></td>
-        </tr>
+        </tr> -->
   </table>
 </div>
 </div>

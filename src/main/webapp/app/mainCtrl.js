@@ -12,9 +12,16 @@ $rootScope.days = [ "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
 $rootScope.years = CommonService.years(1970);
 
 $rootScope.yesNo =["Yes","No"];
-$rootScope.legPostion = ["Left","Right"];
-$rootScope.status =["ACTIVE","BLOCKED","INPROGRESS"];
 $rootScope.legPosition = ["Left","Right"];
+$rootScope.status =["ACTIVE","BLOCKED","INPROGRESS"];
+$rootScope.package_name = ["Free Package - 0.00 (FBV :0.00)",
+                          "Flywin Premium package- 4399.00 (FBV :50.00)",
+                          "Flywin crown package-9999.00 (FBV :50.00)",
+                          "Flywin Silver package-12999.00 (FBV :100.00)",
+                          "Flywin Diamond package-18999.00 (FBV :100.00)"];
+$rootScope.transactionType = ["Credited","Debited"];
+$rootScope.transactionMode = ["By Cash","NetBanking","Tez","PhonePay","BHIM","Paytm","PayZapp","Others"];
+
 $rootScope.dateToString = function(dateObj){
  return	new Date(dateObj).toDateString();
 }

@@ -52,9 +52,9 @@
 					data-toggle="dropdown">My Income <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="javascript:void(0)"
-							>Weekely Incentive </a></li>
+							ng-click="passbookSummary(authUser.id)" >Passbook Summary</a></li>
 							<li><a href="javascript:void(0)"
-							>HighestEarn of the week</a></li>
+							>Highest Earn of the week</a></li>
 
 					</ul></li>
 					
@@ -69,8 +69,15 @@
 			class="navbar-collapse collapse">
 			<ul class="nav navbar-nav pull-right mainNav">
 
-				<li><a href="javascript:void(0)"
-					ng-click="approval(authUser.distributerId)">Approve </a></li>
+					
+					<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown">Approval<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0)"
+							ng-click="approval(authUser.distributerId)">User Approval</a></li>
+						<li><a href="javascript:void(0)" ng-click="sendMoneyToUser()">Money Transfer</a></li>
+					</ul></li>
+					
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown">User Details<b class="caret"></b></a>
 					<ul class="dropdown-menu">

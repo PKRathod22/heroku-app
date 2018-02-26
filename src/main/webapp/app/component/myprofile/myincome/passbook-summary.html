@@ -1,0 +1,48 @@
+<div ng-controller="MyProfileCtrl">
+	<header id="head" class="secondary">
+		<div class="container">
+			<h1>
+				<a href="javascriit:void(0)" style="color: #fcfdff;"
+					>Passbook Summary</a>
+			</h1>
+		</div>
+	</header>
+
+	<div class="container">
+	<div class="row">
+	<h2 class="line">Transaction Details List :</h2>
+  <table  class="table table-bordered" style="width=400;">
+      <tr>
+      <th>SI No.</th>
+      <th>DID</th>
+      <th>Name</th>
+       <th>Transaction Date</th>
+       <th>Transaction Type</th>
+       <th>Transaction Mode</th>
+       <th>Transaction Number</th>
+       <th>Bank Name</th>
+       <th>Account Number</th>
+       <th>Amount Received</th>
+      </tr>
+     
+      <tr ng-repeat ="data in userTransactionList track by $index">
+      <td>{{$index+1}}</td>
+      <td>{{data.user.distributerId}}</td>
+      <td>{{data.user.userName}}</td>
+      <td>{{dateToString(data.transactionDate)}}</td>
+      <td>{{data.transactionType}}</td>
+      <td>{{data.transactionMode}}</td>
+      <td>{{data.transactionNumber}}</td>
+      <td>{{data.bankName}}</td>
+      <td>{{data.accountNumber}}</td>
+      <td><strong>{{data.amountSign}}&nbsp&nbsp&#8377{{data.amountReceived}}</strong></td>
+      
+      
+      </tr>
+      
+      
+      
+  </table>
+</div>
+</div>
+</div>

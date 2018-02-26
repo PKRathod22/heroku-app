@@ -80,10 +80,30 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl : '/app/component/myprofile/approval-profile.html'
 	})
 	
+	.state('layout.sendMoney', {
+		url : '/sendmoney',
+		params : {
+			id : null,
+			obj:null,
+			action : "send"
+		},
+		controller : 'MyProfileCtrl',
+		templateUrl : '/app/component/myprofile/admin/money-transfer.html'
+	})
+	
 	.state('layout.recentjoin', {
 		url : '/recentuser',
 		controller : 'MyProfileCtrl',
 		templateUrl : '/app/component/myprofile/recent-registered.html'
+	})
+	
+	.state('layout.passbook', {
+		url : '/passbook',
+		params : {
+			obj : null
+		},
+		controller : 'MyProfileCtrl',
+		templateUrl : '/app/component/myprofile/myincome/passbook-summary.html'
 	})
 	
 	.state('layout.mydownline', {

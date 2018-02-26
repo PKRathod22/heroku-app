@@ -1,5 +1,5 @@
 app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
-		Notification, UpdateUser, UserGetById, $stateParams,CommonService,GetAllRecentUser,GetDownlineUser) {
+		Notification, UpdateUser, UserGetById, $stateParams,SendMoneyToUser,UserTransactionById,CommonService,GetAllRecentUser,GetDownlineUser,ngDialog) {
 
 	var userMaster = {};
 
@@ -63,14 +63,107 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 			Notification.error("service-unavailable.");
 			console.error("exception found to downline user list !", error);
 		});
-
-	
     }
+	
+	$scope.sendMoneyConfirm = function(userTransaction,authUser){
+		
+		if(authUser == null){
+			Notification.error('Fetch the user to send money  !');
+			return;
+		}
+		$scope.userTransaction = userTransaction;
+		
+		if($scope.userTransaction !=null && $scope.userTransaction.transactionMode=='By Cash'
+			|| $scope.userTransaction.transactionMode=='NetBanking'){
+			$scope.userTransaction.transactionNumber = null;
+		}
+		
+		$scope.userTransaction.user = authUser;
+		SendMoneyToUser.send($scope.userTransaction).$promise.then(function(data){
+			if (data.errorDescription == "ERR0") {
+				Notification.success('Money send to user Successfully !');
+   				console.log("send money to user Successfully");
+   			} else {
+				Notification.error('send money to user failed !');
+   				console.log("send money to user failed. ")
+   			}
+		},function(error){
+			console.log("send money to user failed. ",error)
+			Notification.error("service-unavailable.");
+		});
+	}
+	
+	
+	
+	/*$scope.sendMoneyConfirm = function(){
+
+		var newScope = $scope.$new();
+		newScope.errorMessage = "Are you sure you want to send money";
+		ngDialog.openConfirm({
+            template:
+                '<p>{{errorMessage}}</p>' +
+                '<div class="ngdialog-buttons">' +
+                  '<button type="button" class="ngdialog-button" ng-click="closeThisDialog(0)">No' +
+                  '<button type="button" class="ngdialog-button" ng-click="confirm(1)">Yes' +
+                '</button>' +
+				   '</div>',
+            plain: true,
+            scope: newScope,
+            closeByEscape :true,
+            closeByDocument: true,
+            className: 'ngdialog-theme-plain'
+        }).
+			then(function (value) {
+				SendMoneyToUser.send({
+					obj :$rootScope.userTransaction
+       		}, function(data) {
+       			if (data.responseDescription == 'ERR0') {
+    				Notification.success('end money to user Successfully !');
+       				console.log("send money to user Successfully");
+       			} else {
+    				Notification.error('send money to user failed !');
+       				console.log("send money to user failed. ")
+       			}
+       		}, function(error) {
+				Notification.success('send money to user failed !');
+       			console.log("send money to user failed  : " + error)
+       		});
+           }, function (value) {
+				Notification.error('sending money failed.');
+               console.log("sending cancelled");
+             
+           });
+		
+	}*/
+	
+	$scope.passbookSummary = function(id){
+		
+		console.log('passbookSummary pressed ::::::- ' + id);
+		UserTransactionById.get({id:id}).$promise.then(function(data) {
+			if (data.errorDescription == "ERR0") {
+				$scope.userTransactionList = [];
+				var obj = {};
+				$rootScope.userTransactionList = data.responseContents;
+				console.log("passbookSummary list :::::", $scope.userTransactionList);
+				$state.go('layout.passbook',{obj:$scope.userTransactionList});
+			}}, function(error) {
+			Notification.error("service-unavailable.");
+			console.error("exception found to downline user list !", error);
+		});
+	}
+	
 	
 	$scope.approval = function(){
 		$state.go('layout.approve');
 	}
 	
+	$scope.sendMoneyToUser = function(){
+		$rootScope.userTransaction = {};
+		$rootScope.userTransaction.transactionType="Credited";
+		$rootScope.userTransaction.transactionMode="By Cash";
+		var obj = {};
+		$state.go('layout.sendMoney',{obj:$rootScope.userTransaction});	
+	}
 	
 	$scope.updateUserProfile = function() {
 		console.log('update user details..');
@@ -162,9 +255,9 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 			if(fetchType==true && data.responseContent!=null && !CommonService.isObjectEmpty(data.responseContent) ){
 				$scope.signUpUser = {};
 				$scope.signUpUser = data.responseContent;
-				Notification.success('Distributer Id is valid !');
+				//Notification.success('Distributer Id is valid !');
 			}else if(fetchType==true && data.responseContent==null){
-				Notification.error('Distributer Id is not valid !');
+				Notification.error('Invalid distributer id');
 			}
 			$scope.setOldDataVal();
 

@@ -19,6 +19,7 @@ import com.pk.model.SequenceName;
 import com.pk.model.UserMaster;
 import com.pk.repositoy.SequenceRepository;
 import com.pk.repositoy.UserRepository;
+import com.pk.repositoy.UserTransactionRepository;
 
 import lombok.extern.log4j.Log4j;
 
@@ -103,14 +104,15 @@ public class UserServices {
 			user.setStatus("BLOCKED");
 		}else if(user!=null && user.getSponsorID() !=null && user.getSponsorID().trim() != null || !user.getSponsorID().isEmpty()){
 			user.setDesignation("REFERAL JOINEE");
-		    user.setStatus("INPROGRESS");
+			if(user.getPaymentStatus() !=null && user.getPaymentStatus() == false){
+				user.setStatus("BLOCKED");
+			}
+			user.setStatus("INPROGRESS");
 		      UserMaster userDetail= userRepository.findByDistributerId(user.getSponsorID());
 		      if(userDetail==null || userDetail.getDistributerId()==null){
 		    	throw new RestException("Sponser Id doesn,t exist");  
 		      }
 		      user.setMySponserName(userDetail.getUserName());
-		}if(user.getPaymentStatus() !=null && user.getPaymentStatus() == true){
-			user.setStatus("ACTIVE");
 		}
 		user.setCreatedDate(new Date());
 	}

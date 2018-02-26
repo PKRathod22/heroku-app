@@ -1,0 +1,157 @@
+<header id="head" class="secondary">
+	<div class="container">
+		<h1>Transfer Money to user</h1>
+	</div>
+</header>
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-8">
+			</br>
+			<h2 class="line">User Details</h2>
+			<div class="row">
+			<div class="col-md-6">
+								<h3 class="section-title"></h3>
+								<button  class="btn btn-two" 
+								style="margin-top: -58px;"
+								 ng-click="fetchByDistributerId(signUpUser.distributerId)">
+					<i class="fa fa-refresh"></i> Fetch Result
+				</button>
+							</div> 
+			</div>
+			<form class="form-light mt-20" role="form">
+				<div class="row">
+				<div class="col-md-4">
+						<label>Distributer Id</label> <input maxlength="10"
+							class="form-control" ng-model="signUpUser.distributerId">
+
+					</div>
+					<div class="col-md-4">
+						<label>Sponser Id</label>
+						 <p  class="form-control"
+							 >{{signUpUser.sponsorID}}</p>
+					</div>
+					
+					
+					<div class="col-md-4">
+					<label>Status<span class="required"> &nbsp*</span></label> 
+							
+							<output 
+							 class="form-control btn-1"
+							   ng-style="{'background-color':myColor}"
+							>{{signUpUser.status}}</output>
+							   
+					</div>
+					
+					
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Full Name</label> <p class="form-control"
+								 >{{signUpUser.userName}}</p>
+						</div>
+					</div>
+					
+						<div class="col-md-2">
+						<label>Position</label> 
+						<p  class="form-control" >{{signUpUser.legPosition}}</p>
+
+					</div>
+					<div class="col-md-2">
+					<label>Gender</label> 
+					<p class="form-control"
+							  >{{signUpUser.gender}}</p>
+					</div>				
+					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Primary Mobile Number</label> <p class="form-control"
+								>{{signUpUser.mobileNumber}}</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			<h2 class="line">Bank Account Details</h2>
+
+                 <div class="row">
+                 
+                 <div class="col-md-6">
+						<div class="form-group">
+							<label>Account Number</label> <output class="form-control">{{authUser.accountNo}}</output>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Bank Name</label> <output class="form-control">{{authUser.bankName}}</output>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>IFSC Code</label> <output class="form-control">{{authUser.ifscCode}}</output>
+						</div>
+					</div>
+                 
+                   <!-- <div class="col-md-3">
+						<label>Transaction Mode</label>
+						<output 
+							   class="form-control"
+							  >{{authUser.transactionMode}}</output>
+					</div>
+					
+					<div class="col-md-3">
+						<label>Transaction Number</label>
+						<output 
+							   class="form-control" >{{authUser.transactionNumber}}</output>
+					</div>
+                  -->
+                 
+                 </div>
+              <h2 class="line">Transaction Details</h2>
+                 <div class="row">
+                 
+                 <div class="col-md-3">
+						<label>Transaction Type</label> 
+						<select 
+							   class="form-control"
+							   ng-model="userTransaction.transactionType" 
+							   ng-options="item for item in transactionType"></select>
+						
+					</div>
+					
+					 <div class="col-md-3">
+						<label>Transaction Mode</label>
+						<select 
+							   class="form-control"
+							   ng-model="userTransaction.transactionMode" 
+							   ng-options="item for item in transactionMode"></select>
+						 
+
+					</div>
+					
+					 <div class="col-md-3" ng-show="userTransaction.transactionMode!='By Cash' && userTransaction.transactionMode!='NetBanking'">
+						<label>Transaction Number</label> <input 
+							class="form-control" ng-model="userTransaction.transactionNumber">
+
+					</div>
+					
+						 <div class="col-md-3">
+						<label>Amount </label> <input 
+							class="form-control" ng-model="userTransaction.amountReceived">
+
+					</div>
+                 
+                 
+                 </div>
+                 
+				<button type="submit" class="btn btn-two btn-2"  ng-click="sendMoneyConfirm(userTransaction,authUser)">
+					<i class="fa fa-check"></i> Send Money
+				</button>
+				<p>
+					<br />
+				</p>
+			</form>
+		</div>
+	</div>
+</div>

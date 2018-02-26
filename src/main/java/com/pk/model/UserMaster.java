@@ -90,22 +90,18 @@ public class UserMaster implements Serializable {
     //Qualification
     String address;
     //Payment Deposit Detail
-    String paymentType;
-    String paytmNumber;
+   
+    String transactionMode;
+    String transactionNumber;
     
-    String purchaseDay;
-    String purchaseMonth;
-    String purchaseYear;
     String packageName;
     String packageMrp;
-    String topupDate;
     String designation;
-    
-    Double earnAmount;
+    Double paidAmount;
     
     Date currentLoginDate;
     String status;
-    Boolean paymentStatus = false;
+    Boolean paymentStatus;
     Date createdDate;
     Date modifiedDate;
     
