@@ -86,19 +86,19 @@
 					</div>
 					</div>
 					<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-3">
 							<div class="form-group">
-								<label>Sponser Id</label> <input class="form-control" maxlength="6"
+								<label>Sponser Id</label> <input class="form-control" maxlength="10"
 									placeholder="Sponser ID" ng-model="userMaster.sponsorID">
 									
 							</div>
 						</div>
 						
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
-								<label>Payment</label> <select class="form-control" 
-								  ng-options="item for item in yesNo"
-									placeholder="Sponser ID" ng-model="userMaster.paymentStatus"></select>
+								<label>Package</label> <select class="form-control" 
+								  ng-options="item for item in package_name"
+									ng-model="userMaster.packageName"></select>
 									
 							</div>
 						</div>
@@ -114,6 +114,34 @@
 					
 					</div>
 					<div class="row">
+					
+					<div class="col-md-3">
+							<div class="form-group">
+								<label>Payment</label> <select class="form-control" 
+								  ng-options="item for item in yesNo"
+									placeholder="Sponser ID" ng-model="userMaster.paymentStatus"></select>
+									
+							</div>
+						</div>
+						
+						<div class="col-md-3" ng-if="userMaster.paymentStatus=='Yes'">
+							<div class="form-group">
+								<label>Paid Amount </label> 
+								<input class="form-control"  ng-model="userMaster.paidAmount"/>
+									
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Email</label> <input type="email" class="form-control" maxlength="50"
+									placeholder="Your Email" ng-model="userMaster.email">
+							</div>
+						</div>
+					
+					</div>
+					
+					<div class="row">
 					<div class="col-md-6">
 							<div class="form-group">
 								<label>Password<span class="required"> &nbsp*</span></label> <input type="password" class="form-control" maxlength="50"
@@ -122,12 +150,6 @@
 							<span ng-show="errorMap.get('password')!=null"> <small>{{errorMap.get('password')}}</small>
 							</span>
 						</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Email</label> <input type="email" class="form-control" maxlength="50"
-									placeholder="Your Email" ng-model="userMaster.email">
 							</div>
 						</div>
 						
