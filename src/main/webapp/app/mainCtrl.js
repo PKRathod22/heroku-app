@@ -22,6 +22,8 @@ $rootScope.package_name = ["Free Package - 0.00 (FBV :0.00)",
 $rootScope.transactionType = ["Credited","Debited"];
 $rootScope.transactionMode = ["By Cash","NetBanking","Tez","PhonePay","BHIM","Paytm","PayZapp","Others"];
 
+$rootScope.maritalStatus=["Single","In Relation","Married","UnMarried","Complicated"];
+
 $rootScope.dateToString = function(dateObj){
  return	new Date(dateObj).toDateString();
 }
@@ -50,10 +52,15 @@ $scope.errorMap = new Map();
    $scope.registerFlag = false;
    
    $scope.registerTab = function(){
+	   $scope.errorMap = new Map();
 	   $scope.registerFlag = true; 
 	   $scope.loginFlag = false;
 	   $scope.userMaster = {};
-	   $scope.errorMap = new Map();;
+
+	   $scope.userMaster.gender ="Male";
+       $scope.userMaster.packageName="Free Package - 0.00 (FBV :0.00)";   
+       $scope.userMaster.legPosition ="Left";
+       $scope.userMaster.paymentStatus ="No";
    }
    
    $scope.loginTab = function(){

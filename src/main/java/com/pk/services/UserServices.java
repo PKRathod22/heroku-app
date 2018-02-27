@@ -99,22 +99,28 @@ public class UserServices {
 	}
 	
 	public void validateNewJoinee(UserMaster user) {
-		if (user.getSponsorID().isEmpty() || user.getSponsorID() == null) {
-			user.setDesignation("NEW JOINEE");
-			user.setStatus("BLOCKED");
-		}else if( !user.getSponsorID().isEmpty() || user.getSponsorID() !=null){
-			user.setDesignation("REFERAL JOINEE");
-		      UserMaster userDetail= userRepository.findByDistributerId(user.getSponsorID());
-		      if(userDetail==null){
-		    	throw new RestException("Sponser Id doesn,t exist");  
-		      }
-		      user.setMySponserName(userDetail.getUserName());
-		}
-		if(user.getPaymentStatus() == true){
-			user.setStatus("ACTIVE");
+		if(user==null){
+	    	throw new RestException("user is null");  
 		}else{
-			user.setStatus("BLOCKED");	
+			if (user.getSponsorID() !=null && !user.getSponsorID().isEmpty() ) {
+				UserMaster userDetail = userRepository.findByDistributerId(user.getSponsorID());
+				if (userDetail == null) {
+					throw new RestException("Sponser Id doesn,t exist");
+				}
+				user.setMySponserName(userDetail.getUserName());
+				user.setDesignation("REFERAL JOINEE");
+			}else{
+				user.setDesignation("NEW JOINEE");
+			}
+			if(user.getPaymentStatus() == true){
+				user.setStatus("ACTIVE");
+			}else{
+				user.setStatus("BLOCKED");	
+			}
 		}
+		
+		
+		
 		
 		user.setCreatedDate(new Date());
 	}

@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-8">
 			</br>
-			<h2 class="line">My Information</h2>
+			<h2 class="line">My Personal Information</h2>
 			<form class="form-light mt-20" role="form">
 				<div class="row">
 					<div class="col-md-4">
@@ -50,12 +50,19 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="form-group">
 							<label>Email Id</label> <input class="form-control"
-								maxlength="20" placeholder="myname@mail.com"
+								maxlength="30" placeholder="your email Id"
 								ng-model="authUser.email">
 						</div>
+					</div>
+					<div class="col-md-2">
+					<label>Marital Status</label> 
+							<select 
+							   class="form-control"
+							   ng-model="authUser.maritalStatus" 
+							   ng-options="item for item in maritalStatus"></select>
 					</div>
 					<div>
 					<div class="col-md-2">
@@ -74,10 +81,13 @@
 					</div>
 					<div class="col-md-2">
 					<label>Year</label>
-					<select  maxlength="4"
+					<input  maxlength="4"
+							   class="form-control"
+							   ng-model="authUser.dobYear">
+					<!-- <select  maxlength="4"
 							   class="form-control"
 							   ng-model="authUser.dobYear"
-							   ng-options="item for item in years"></select> 
+							   ng-options="item for item in years"></select> --> 
 							
 					</div>
 					</div>
