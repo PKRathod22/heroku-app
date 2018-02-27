@@ -113,7 +113,7 @@ public class UserServices {
 				user.setDesignation("NEW JOINEE");
 			}
 			if(user.getPaymentStatus() == true){
-				user.setStatus("ACTIVE");
+				user.setStatus("INPROGRESS");
 			}else{
 				user.setStatus("BLOCKED");	
 			}
