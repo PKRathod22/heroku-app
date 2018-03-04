@@ -3,7 +3,7 @@
 		<div class="container">
 			<h1>
 				<a href="javascriit:void(0)" style="color: #fcfdff"
-					ng-click="loginTab()">Log in </a> | <a href="javascriit:void(0)" style="color: #fcfdff" ng-click="registerTab()">Register</a>
+					ng-click="loginTab()"><i class="fa fa-sign-in">&nbsp Log in </i></a> &nbsp|&nbsp <a href="javascriit:void(0)" style="color: #fcfdff" ng-click="registerTab()"><i class="fa fa-user">&nbsp Register</i></a>
 			</h1>
 		</div>
 	</header>
@@ -126,7 +126,7 @@
 						
 						<div class="col-md-3" ng-if="userMaster.paymentStatus=='Yes'">
 							<div class="form-group">
-								<label>Paid Amount </label> 
+								<label>Paid Amount ( &nbsp<i class="fa fa-rupee"></i>&nbsp)</label> 
 								<input class="form-control"  ng-model="userMaster.paidAmount"/>
 									
 							</div>
