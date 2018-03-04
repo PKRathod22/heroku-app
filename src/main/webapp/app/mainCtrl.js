@@ -28,6 +28,10 @@ $rootScope.dateToString = function(dateObj){
  return	new Date(dateObj).toDateString();
 }
 
+$rootScope.beforeSpace = function(str){
+	return str = str.trim().split(/\s(.+)/)[0];  //everything before the first space
+}
+
 $rootScope.prod = {imagePaths: []};
 $rootScope.prod.imagePaths = [
   	{ custom: 'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg', thumbnail: 'http://flexslider.woothemes.com/images/kitchen_adventurer_cheesecake_brownie.jpg' },
