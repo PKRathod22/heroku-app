@@ -98,6 +98,7 @@ public class UserMaster implements Serializable {
     String packageMrp;
     String designation;
     Double paidAmount;
+    Double duesAmount;
     
     Date currentLoginDate;
     String status;
