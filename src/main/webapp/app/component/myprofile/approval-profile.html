@@ -57,7 +57,7 @@
 					</div>
 
 					<div class="col-md-2">
-						<label>Position</label>
+						<label>Leg Position</label>
 						<p class="form-control">{{signUpUser.legPosition}}</p>
 
 					</div>
@@ -76,12 +76,19 @@
 				</div>
 
 				<div class="row">
-					<!-- <div class="col-md-4">
+					 <div class="col-md-4">
 						<div class="form-group">
-							<label>Last Earn Amount</label> <input class="form-control"
-								ng-model="signUpUser.earnAmount">
+							<label>Dues Amount</label> <input class="form-control"
+								ng-model="signUpUser.duesAmount">
 						</div>
-					</div> -->
+					</div> 
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Paid Amount</label> <input class="form-control"
+								ng-model="signUpUser.paidAmount">
+						</div>
+					</div> 
+					
 
 				</div>
 				<button type="submit" class="btn btn-two" ng-click="updateStatus()">
