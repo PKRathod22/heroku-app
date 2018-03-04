@@ -42,5 +42,11 @@
     margin-left: -1px;
 }
     
-    
+  .num {
+  position: absolute;
+  right: 11px;
+  top: 6px;
+  color: #f5356a;
+  margin-right: -1px;
+}    
     

@@ -57,10 +57,10 @@
 							>Highest Earn of the week</a></li>
 
 					</ul></li>
-					
+				<li><a href="javascript:void(0)" ><i class="fa fa-bell-o"></i><span class="num" ><b style="font-size: 15px;">2</b></span></a></li>
 				<li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
 				<li><p ng-if="authUser.id!=null" href="javascript:void(0)">Hi
-						{{authUser.userName}}!</p></li>
+						{{beforeSpace(authUser.userName)}}!</p></li>
 
 			</ul>
 		</div>
@@ -92,10 +92,10 @@
 							ng-click="myprofile(authUser.distributerId)">Admin Profile</a></li>
 						<li><a href="javascript:void(0)"
 							ng-click="editProfile(authUser.distributerId)">Edit Profile</a></li>
-						<li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
 					</ul></li>
+					<li><a href="javascript:void(0)" ng-click="logout()">Logout</a></li>
 				<li><p ng-if="authUser.id!=null" href="javascript:void(0)">Hi
-						{{authUser.userName}}!</p></li>
+						{{beforeSpace(authUser.userName)}}!</p></li>
 
 			</ul>
 		</div>
