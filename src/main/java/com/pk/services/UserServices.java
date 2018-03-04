@@ -19,7 +19,6 @@ import com.pk.model.SequenceName;
 import com.pk.model.UserMaster;
 import com.pk.repositoy.SequenceRepository;
 import com.pk.repositoy.UserRepository;
-import com.pk.repositoy.UserTransactionRepository;
 
 import lombok.extern.log4j.Log4j;
 
