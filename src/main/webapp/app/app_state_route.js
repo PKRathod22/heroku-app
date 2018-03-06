@@ -130,7 +130,9 @@ app
 
 								
 								
-								/*if (($rootScope.userLogged == "true" || $rootScope.userLogged == true)
+								/*
+								 * if(toState.name.includes("layout."))
+								 * if (($rootScope.userLogged == "true" || $rootScope.userLogged == true)
 										&& toState.name === "layout.login") {
 									event.preventDefault();
 									$state.go(toState.name);

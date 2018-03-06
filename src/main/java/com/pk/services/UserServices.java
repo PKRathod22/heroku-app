@@ -26,63 +26,63 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class UserServices {
 
-	
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	SequenceRepository sequenceRepository;
-	
+
 	@Value("${session.timeout}")
 	int sessionTimeout;
-	
-	public BaseDto login(UserMaster user,HttpServletRequest request){
+
+	public BaseDto login(UserMaster user, HttpServletRequest request) {
 		BaseDto baseDto = new BaseDto();
 		try {
-			if(user!=null && user.getDistributerId()!=null && user.getPassword() !=null){
-			    UserMaster existingUser = userRepository.findByUserAndPassword(user.getDistributerId().trim(),user.getPassword().trim());
-			    if(existingUser == null && existingUser.getDistributerId()==null){
-			    	log.info("not valid user");
-			    	throw new RestException(ErrorCode.FAILED);
-			    }
-			    existingUser.setCurrentLoginDate(new Date());
-			    userRepository.save(existingUser);
-			    HttpSession session = request.getSession(true);
+			if (user != null && user.getDistributerId() != null && user.getPassword() != null) {
+				UserMaster existingUser = userRepository.findByUserAndPassword(user.getDistributerId().trim(),
+						user.getPassword().trim());
+				if (existingUser == null && existingUser.getDistributerId() == null) {
+					log.info("not valid user");
+					throw new RestException(ErrorCode.FAILED);
+				}
+				existingUser.setCurrentLoginDate(new Date());
+				userRepository.save(existingUser);
+				HttpSession session = request.getSession(true);
 				session.setMaxInactiveInterval(sessionTimeout);
 
-			    existingUser.setSessionId(session.getId());
-				
-			    baseDto.setResponseContent(existingUser);
-			    baseDto.setErrorDescription(ErrorCode.SUCCESS);
+				existingUser.setSessionId(session.getId());
+
+				baseDto.setResponseContent(existingUser);
+				baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			}
 		} catch (Exception e) {
-			 baseDto.setErrorDescription(ErrorCode.FAILED);
-           log.error("error found while login",e);
+			baseDto.setErrorDescription(ErrorCode.FAILED);
+			log.error("error found while login", e);
 		}
 		return baseDto;
 	}
-	
-	
-	public BaseDto getById(String distributerId){
+
+	public BaseDto getById(String distributerId) {
 		BaseDto baseDto = new BaseDto();
-		log.info("get By id start Distributer  ID : "+distributerId);
+		log.info("get By id start Distributer  ID : " + distributerId);
 		try {
-		    UserMaster userMaster = userRepository.findByDistributerId(distributerId.trim());
-		    baseDto.setResponseContent(userMaster);
-		    baseDto.setErrorDescription(ErrorCode.SUCCESS);
+			UserMaster userMaster = userRepository.findByDistributerId(distributerId.trim());
+			baseDto.setResponseContent(userMaster);
+			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			log.info("user master getbyid successfully");
 		} catch (Exception e) {
 			baseDto.setErrorDescription(ErrorCode.FAILED);
-			log.error("found exception in user master getby id",e);
+			log.error("found exception in user master getby id", e);
 		}
 		return baseDto;
 	}
-	
+
 	public void generateDistributerId(UserMaster user) {
 		if (user.getUserName() != null) {
 			String fullName = user.getUserName();
 			String firstTwo = fullName.substring(0, 2);
-			SequenceConfig sequenceConfig = sequenceRepository.findBySequenceName(SequenceName.GEN_DISTRIBUTED_ID.toString());
+			SequenceConfig sequenceConfig = sequenceRepository
+					.findBySequenceName(SequenceName.GEN_DISTRIBUTED_ID.toString());
 			if (sequenceConfig == null) {
 				log.error("sequence is null");
 				throw new RestException(ErrorCode.FAILED);
@@ -96,68 +96,64 @@ public class UserServices {
 		}
 
 	}
-	
+
 	public void validateNewJoinee(UserMaster user) {
-		if(user==null){
-	    	throw new RestException("user is null");  
-		}else{
-			if (user.getSponsorID() !=null && !user.getSponsorID().isEmpty() ) {
+		if (user == null) {
+			throw new RestException("user is null");
+		} else {
+			if (user.getSponsorID() != null && !user.getSponsorID().isEmpty()) {
 				UserMaster userDetail = userRepository.findByDistributerId(user.getSponsorID());
 				if (userDetail == null) {
 					throw new RestException("Sponser Id doesn,t exist");
 				}
 				user.setMySponserName(userDetail.getUserName());
 				user.setDesignation("REFERAL JOINEE");
-			}else{
+			} else
 				user.setDesignation("NEW JOINEE");
-			}
-			if(user.getPaymentStatus() == true){
+			if (user.getPaymentStatus() == true)
 				user.setStatus("INPROGRESS");
-			}else{
-				user.setStatus("BLOCKED");	
+			else
+				user.setStatus("BLOCKED");
+
+			if (user.getPackageName() != null
+					&& user.getPackageName().equalsIgnoreCase("Flywin Premium package- 4399.00 (FBV :50.00)")
+					&& user.getPaidAmount() != null) {
+				Double packagePrice = 4399.00;
+				Double paidAmount = user.getPaidAmount();
+				Double duesAmount = packagePrice - paidAmount;
+				user.setDuesAmount(duesAmount);
+			} else if (user.getPackageName() != null
+					&& user.getPackageName().equalsIgnoreCase("Flywin crown package-9999.00 (FBV :50.00)")
+					&& user.getPaidAmount() != null) {
+				Double packagePrice = 9999.00;
+				Double paidAmount = user.getPaidAmount();
+				Double duesAmount = packagePrice - paidAmount;
+				user.setDuesAmount(duesAmount);
+			} else if (user.getPackageName() != null
+					&& user.getPackageName().equalsIgnoreCase("Flywin Silver package-12999.00 (FBV :100.00)")
+					&& user.getPaidAmount() != null) {
+				Double packagePrice = 12999.00;
+				Double paidAmount = user.getPaidAmount();
+				Double duesAmount = packagePrice - paidAmount;
+				user.setDuesAmount(duesAmount);
+			} else if (user.getPackageName() != null
+					&& user.getPackageName().equalsIgnoreCase("Flywin Diamond package-18999.00 (FBV :100.00)")
+					&& user.getPaidAmount() != null) {
+				Double packagePrice = 18999.00;
+				Double paidAmount = user.getPaidAmount();
+				Double duesAmount = packagePrice - paidAmount;
+				user.setDuesAmount(duesAmount);
 			}
-		 if(user.getPackageName()!=null 
-		 && user.getPackageName().equalsIgnoreCase("Flywin Premium package- 4399.00 (FBV :50.00)")
-		 && user.getPaidAmount()!=null){
-			 Double packagePrice= 4399.00;
-			 Double paidAmount = user.getPaidAmount();
-			 Double duesAmount  =packagePrice-paidAmount;
-			 user.setDuesAmount(duesAmount);
-		 }else if(user.getPackageName()!=null 
-				 && user.getPackageName().equalsIgnoreCase("Flywin crown package-9999.00 (FBV :50.00)")
-				 && user.getPaidAmount()!=null){
-					 Double packagePrice= 9999.00;
-					 Double paidAmount = user.getPaidAmount();
-					 Double duesAmount  =packagePrice-paidAmount;
-					 user.setDuesAmount(duesAmount);
-				 }
-		 else if(user.getPackageName()!=null 
-				 && user.getPackageName().equalsIgnoreCase("Flywin Silver package-12999.00 (FBV :100.00)")
-				 && user.getPaidAmount()!=null){
-					 Double packagePrice= 12999.00;
-					 Double paidAmount = user.getPaidAmount();
-					 Double duesAmount  =packagePrice-paidAmount;
-					 user.setDuesAmount(duesAmount);
-				 }
-		 else if(user.getPackageName()!=null 
-				 && user.getPackageName().equalsIgnoreCase("Flywin Diamond package-18999.00 (FBV :100.00)")
-				 && user.getPaidAmount()!=null){
-					 Double packagePrice= 18999.00;
-					 Double paidAmount = user.getPaidAmount();
-					 Double duesAmount  =packagePrice-paidAmount;
-					 user.setDuesAmount(duesAmount);
-				 }
-			
-			
+
+			if (user.getPaidAmount() == null)
+				user.setPaidAmount(0.0d);
+			if (user.getDuesAmount() == null)
+				user.setDuesAmount(0.0d);
+			user.setCreatedDate(new Date());
 		}
-		
-		
-		
-		
-		user.setCreatedDate(new Date());
 	}
 
-	public BaseDto registor(UserMaster user){
+	public BaseDto registor(UserMaster user) {
 		BaseDto baseDto = new BaseDto();
 		log.info("register start");
 		try {
@@ -168,52 +164,52 @@ public class UserServices {
 			log.info("register successfully");
 		} catch (Exception e) {
 			baseDto.setErrorDescription(ErrorCode.FAILED);
-			log.error("found exception in register",e);
+			log.error("found exception in register", e);
 		}
 		return baseDto;
 	}
-	
-	public BaseDto updateUser(UserMaster user){
+
+	public BaseDto updateUser(UserMaster user) {
 		BaseDto baseDto = new BaseDto();
 		try {
-			log.info("User object : "+user);
+			log.info("User object : " + user);
 			user.setModifiedDate(new Date());
-			if(user.getId()!=null && user.getDistributerId() !=null){
+			if (user.getId() != null && user.getDistributerId() != null) {
 				UserMaster exsistUser = userRepository.findByDistributerId(user.getDistributerId());
-				if(exsistUser.getVersion()!=null)
-				user.setVersion(exsistUser.getVersion());
+				if (exsistUser.getVersion() != null)
+					user.setVersion(exsistUser.getVersion());
 			}
-			UserMaster updateUser=	userRepository.save(user);
+			UserMaster updateUser = userRepository.save(user);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			baseDto.setResponseContent(updateUser);
-			log.info("user updated successfully of Distribute Id : "+updateUser.getDistributerId());
+			log.info("user updated successfully of Distribute Id : " + updateUser.getDistributerId());
 		} catch (ObjectOptimisticLockingFailureException e) {
 			log.error("Exception in  -> saveOrUpdate method ", e);
 			baseDto.setErrorDescription(ErrorCode.CANNOT_UPDATE_LOCKED_RECORD);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			baseDto.setErrorDescription(ErrorCode.FAILED);
-			log.error("found exception in update user details",e);
+			log.error("found exception in update user details", e);
 		}
 		return baseDto;
-	}
-	public BaseDto getAll(){
-		BaseDto baseDto = new BaseDto();
-		try{
-		 List<UserMaster> userList = userRepository.getAllById();
-		 log.info("user master list "+userList);
-		 baseDto.setResponseContents(userList);
-		baseDto.setErrorDescription(ErrorCode.SUCCESS);
-		 baseDto.setTotalRecords(userList.size());
-		}catch(Exception e){
-			log.error("found eror in getall user List: [",e);
-			baseDto.setErrorDescription(ErrorCode.FAILED);
-		}
-		return baseDto;
-		
 	}
 
-	
-	public void logout(HttpServletRequest request){
+	public BaseDto getAll() {
+		BaseDto baseDto = new BaseDto();
+		try {
+			List<UserMaster> userList = userRepository.getAllById();
+			log.info("user master list " + userList);
+			baseDto.setResponseContents(userList);
+			baseDto.setErrorDescription(ErrorCode.SUCCESS);
+			baseDto.setTotalRecords(userList.size());
+		} catch (Exception e) {
+			log.error("found eror in getall user List: [", e);
+			baseDto.setErrorDescription(ErrorCode.FAILED);
+		}
+		return baseDto;
+
+	}
+
+	public void logout(HttpServletRequest request) {
 
 		log.debug("Logout Method is Invoked");
 
@@ -230,22 +226,20 @@ public class UserServices {
 			log.debug("Session is already invalidated");
 		}
 	}
-	
-	public BaseDto getDownLineUser(String distributerId){
-		BaseDto baseDto  = new BaseDto();
+
+	public BaseDto getDownLineUser(String distributerId) {
+		BaseDto baseDto = new BaseDto();
 		try {
-			List<UserMaster>  downlineList =	userRepository.getDownlineById(distributerId);
+			List<UserMaster> downlineList = userRepository.getDownlineById(distributerId);
 			baseDto.setErrorDescription(ErrorCode.SUCCESS);
 			baseDto.setResponseContents(downlineList);
-			log.info("Total siz eof downline"+downlineList.size());
+			log.info("Total siz eof downline" + downlineList.size());
 		} catch (Exception e) {
 			baseDto.setErrorDescription(ErrorCode.FAILED);
-			log.error("found exception while getting downline :::",e);
+			log.error("found exception while getting downline :::", e);
 		}
-		
+
 		return baseDto;
 	}
-	
-	
-	
+
 }

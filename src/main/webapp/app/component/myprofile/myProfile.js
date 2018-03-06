@@ -77,8 +77,9 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 			|| $scope.userTransaction.transactionMode=='NetBanking'){
 			$scope.userTransaction.transactionNumber = null;
 		}
-		
-		$scope.userTransaction.user = authUser;
+		if(authUser.distributerId!=null && authUser.distributerId != undefined){
+			$scope.userTransaction.distributerId = authUser.distributerId;
+		}
 		SendMoneyToUser.send($scope.userTransaction).$promise.then(function(data){
 			if (data.errorDescription == "ERR0") {
 				Notification.success('Money send to user Successfully !');
@@ -136,10 +137,10 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 		
 	}*/
 	
-	$scope.passbookSummary = function(id){
+	$scope.passbookSummary = function(distributerId){
 		
-		console.log('passbookSummary pressed ::::::- ' + id);
-		UserTransactionById.get({id:id}).$promise.then(function(data) {
+		console.log('passbookSummary pressed ::::::- ' + distributerId);
+		UserTransactionById.get({id:distributerId}).$promise.then(function(data) {
 			if (data.errorDescription == "ERR0") {
 				$scope.userTransactionList = [];
 				var obj = {};
