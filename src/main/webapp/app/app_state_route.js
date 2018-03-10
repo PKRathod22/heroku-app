@@ -2,6 +2,7 @@
 app.config(function($stateProvider, $urlRouterProvider) {
 	console.log('inside config222');
 	$urlRouterProvider.otherwise('/');
+	$locationProvider.html5Mode(true);
 
 	$stateProvider
 
