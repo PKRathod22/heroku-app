@@ -24,6 +24,13 @@ $rootScope.transactionMode = ["By Cash","NetBanking","Tez","PhonePay","BHIM","Pa
 
 $rootScope.maritalStatus=["Single","In Relation","Married","UnMarried","Complicated"];
 
+$rootScope.differnceBetweenTwoDates = function(date){
+	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+	var firstDate = new Date(date);
+	var secondDate = new Date();
+	 $rootScope.leftDate= Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+}
+
 $rootScope.dateToString = function(dateObj){
  return	new Date(dateObj).toDateString();
 }
