@@ -26,9 +26,15 @@ $rootScope.maritalStatus=["Single","In Relation","Married","UnMarried","Complica
 
 $rootScope.differnceBetweenTwoDates = function(date){
 	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-	var firstDate = new Date(date);
-	var secondDate = new Date();
-	 $rootScope.leftDate= Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+	var createdDate = new Date(date);
+	console.log("createdDate:",createdDate)
+	var thirty_days_from_CreatedDate = new Date((createdDate).getTime() + 30*24*60*60*1000)
+	console.log("thirty_days_from_CreatedDate convert:",thirty_days_from_CreatedDate)
+	//var time = new Date();
+	//time.setDate(time.getDate()+30);
+	//alert(time);
+	// $rootScope.leftDate= Math.round(Math.abs((thirty_days_from_CreatedDate.getTime() - createdDate.getTime())/(oneDay)));
+	 $rootScope.leftDate= Math.round(Math.abs((new Date().getTime() - thirty_days_from_CreatedDate.getTime())/(oneDay)));
 }
 
 $rootScope.dateToString = function(dateObj){
