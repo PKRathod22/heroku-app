@@ -28,7 +28,8 @@ $rootScope.differnceBetweenTwoDates = function(date){
 	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 	var createdDate = new Date(date);
 	console.log("createdDate:",createdDate)
-	var thirty_days_from_CreatedDate = new Date((createdDate).getTime() + 30*24*60*60*1000)
+	var thirty_days_from_CreatedDate = new Date((createdDate).getTime() + 30*24*60*60*1000);
+	$rootScope.thirtyDays =thirty_days_from_CreatedDate;
 	console.log("thirty_days_from_CreatedDate convert:",thirty_days_from_CreatedDate)
 	//var time = new Date();
 	//time.setDate(time.getDate()+30);
