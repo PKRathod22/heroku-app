@@ -3,6 +3,10 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 
 	var userMaster = {};
 
+	$scope.nextTenRecords = function(){
+		
+	}
+	
 	$scope.defaultDashboard = function() {
 		console.log('defaultDashboard');
 		$state.go('layout.home');
@@ -21,15 +25,7 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 		console.log('cources cliked..');
 		$state.go('layout.courses');
 	}
-	$scope.price = function() {
-		console.log('cources cliked..');
-		$state.go('layout.price');
-	}
-
-	$scope.link1 = function() {
-		console.log('rightslid1 cliked..');
-		$state.go('layout.rightslid1');
-	}
+	
 	$scope.contact = function() {
 		console.log('contact cliked..');
 		$state.go('layout.contact');
@@ -241,6 +237,9 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 				if($scope.authUser !=null && $scope.authUser.status!=null){
 					if ($scope.authUser.status == 'INPROGRESS') {
 						$scope.myColor = '#ffb100';
+						if($scope.authUser.duesAmount >0 && $scope.authUser.createdDate!=null && $scope.authUser.createdDate !=undefined){
+							$rootScope.differnceBetweenTwoDates($scope.authUser.createdDate);
+						}
 					}else if ($scope.authUser.status == 'BLOCKED') {
 						$scope.myColor = '#ff2d29';
 					}else if ($scope.authUser.status == 'ACTIVE') {
