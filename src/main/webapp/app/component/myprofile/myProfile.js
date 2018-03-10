@@ -237,11 +237,14 @@ app.controller('MyProfileCtrl', function($scope, $state, $rootScope,$timeout,
 				if($scope.authUser !=null && $scope.authUser.status!=null){
 					if ($scope.authUser.status == 'INPROGRESS') {
 						$scope.myColor = '#ffb100';
-						if($scope.authUser.duesAmount >0 && $scope.authUser.createdDate!=null &&  $scope.authUser.createdDate !=undefined){
+						if($scope.authUser.duesAmount >=0 && $scope.authUser.createdDate!=null &&  $scope.authUser.createdDate !=undefined){
 							$rootScope.differnceBetweenTwoDates($scope.authUser.createdDate);
 						}
 					}else if ($scope.authUser.status == 'BLOCKED') {
 						$scope.myColor = '#ff2d29';
+						if($scope.authUser.duesAmount >=0 && $scope.authUser.createdDate!=null &&  $scope.authUser.createdDate !=undefined){
+							$rootScope.differnceBetweenTwoDates($scope.authUser.createdDate);
+						}
 					}else if ($scope.authUser.status == 'ACTIVE') {
 						$scope.myColor = '#0cb90c';
 					}	
