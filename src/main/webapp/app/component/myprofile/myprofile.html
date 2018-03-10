@@ -10,7 +10,7 @@
 	<div class="container">
 	<div class="row">
   <h2 class="line">Account Details </h2>Last Login Date  &nbsp: &nbsp<span style="color:#0a0aff"> {{lastLoginDate}}</span>
-  <table class="table table-bordered" style="width=400;">
+  <table class="table table-bordered mytable" style="width=400;">
       <tr>
         <th style="width: 504px;">Distributor Id &nbsp:</th>
         <td style="width: 504px;">{{authUser.distributerId}}  <h4>Account Status :</h4>
@@ -42,7 +42,9 @@
       </tr>
       <tr>
         <th>Paid Amount / Dues Amount &nbsp:</th>
-        <td><i class="fa fa-rupee"></i> {{authUser.paidAmount}} &nbsp/&nbsp <i class="fa fa-rupee"></i> {{authUser.duesAmount}}</td>
+        <td><i class="fa fa-rupee"></i> {{authUser.paidAmount}} &nbsp/&nbsp <i class="fa fa-rupee"></i> {{authUser.duesAmount}} / 
+       <div ng-if="authUser.duesAmount>0 && authUser.status!='ACTIVE' "> 
+       </br><i class="fa fa-clock-o"></i><span style="color:#0a0aff">&nbsp<b>{{leftDate}} days remainig</b> </span></div></td>
       </tr>
       
    <!--   <tr>
