@@ -44,7 +44,9 @@
         <th>Paid Amount / Dues Amount &nbsp:</th>
         <td><i class="fa fa-rupee"></i> {{authUser.paidAmount}} &nbsp/&nbsp <i class="fa fa-rupee"></i> {{authUser.duesAmount}} / 
        <div ng-if="authUser.duesAmount>=0 && authUser.status!='ACTIVE' "> 
-       </br><i class="fa fa-clock-o"></i><span style="color:#0a0aff">&nbsp<b>{{leftDate}} days remaining</b> </span></div></td>
+       </br><i class="fa fa-clock-o"></i><span style="color:#0a0aff">&nbsp<b>{{leftDate}} days remaining</b> </span>
+       </br><b>Note :</b> dues must be cleared before <b> {{dateToString(thirtyDays)}} </b> 
+       </div></td>
       </tr>
       
    <!--   <tr>
