@@ -72,7 +72,7 @@ $scope.errorMap = new Map();
 	   $scope.userMaster = {};
 
 	   $scope.userMaster.gender ="Male";
-       $scope.userMaster.packageName="Free Package - 0.00 (FBV :0.00)";   
+       $scope.userMaster.packageName="Flywin Premium package- 4399.00 (FBV :50.00)";   
        $scope.userMaster.legPosition ="Left";
        $scope.userMaster.paymentStatus ="No";
    }
