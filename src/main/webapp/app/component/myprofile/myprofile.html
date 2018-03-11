@@ -54,7 +54,7 @@
        <div ng-show="noOfDaysfromCreatedDate==30"></br><i class="fa fa-clock-o"></i>
        <span style="color:#0a0aff">&nbsp<b> Today is the last day of payment to activate your account without paying Penalty Fee. </b> </span></div>
        </br><b>Note :</b> Dues amount should be cleared before <b> {{dateToString(thirtyDays)}} </b> 
-       {{leftDay}}<div ng-if="noOfDaysfromCreatedDate>=23" >Penalty Fee &nbsp:&nbsp <span style="color:rgb(255, 45, 41)" >
+       <div ng-if="noOfDaysfromCreatedDate>=23" >Penalty Fee &nbsp:&nbsp <span style="color:rgb(255, 45, 41)" >
        <i class="fa fa-rupee" ></i> 99.00 </span></div>
        </td>
       </tr>
