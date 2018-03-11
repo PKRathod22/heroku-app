@@ -14,8 +14,7 @@ $rootScope.years = CommonService.years(1970);
 $rootScope.yesNo =["Yes","No"];
 $rootScope.legPosition = ["Left","Right"];
 $rootScope.status =["ACTIVE","BLOCKED","INPROGRESS"];
-$rootScope.package_name = ["Free Package - 0.00 (FBV :0.00)",
-                          "Flywin Premium package- 4399.00 (FBV :50.00)",
+$rootScope.package_name = ["Flywin Premium package- 4399.00 (FBV :50.00)",
                           "Flywin crown package-9999.00 (FBV :50.00)",
                           "Flywin Silver package-12999.00 (FBV :100.00)",
                           "Flywin Diamond package-18999.00 (FBV :100.00)"];
@@ -27,15 +26,12 @@ $rootScope.maritalStatus=["Single","In Relation","Married","UnMarried","Complica
 $rootScope.differnceBetweenTwoDates = function(date){
 	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 	var createdDate = new Date(date);
-	console.log("createdDate:",createdDate)
-	var thirty_days_from_CreatedDate = new Date((createdDate).getTime() + 30*24*60*60*1000);
-	$rootScope.thirtyDays =thirty_days_from_CreatedDate;
-	console.log("thirty_days_from_CreatedDate convert:",thirty_days_from_CreatedDate)
-	//var time = new Date();
-	//time.setDate(time.getDate()+30);
-	//alert(time);
-	// $rootScope.leftDate= Math.round(Math.abs((thirty_days_from_CreatedDate.getTime() - createdDate.getTime())/(oneDay)));
-	 $rootScope.leftDate= Math.round(Math.abs((new Date().getTime() - thirty_days_from_CreatedDate.getTime())/(oneDay)));
+	var thirtyDaysfromCreatedDate = new Date((createdDate).getTime() + 30*oneDay)
+	$rootScope.thirtyDays =thirtyDaysfromCreatedDate;
+	var secondDate = new Date();
+	
+    $rootScope.noOfDaysfromCreatedDate =Math.round(Math.abs((createdDate.getTime() - secondDate.getTime())/(oneDay)));
+	$rootScope.leftDay = 30-Math.round(Math.abs((createdDate.getTime() - secondDate.getTime())/(oneDay)));
 }
 
 $rootScope.dateToString = function(dateObj){
