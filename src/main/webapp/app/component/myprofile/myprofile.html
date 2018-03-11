@@ -10,7 +10,7 @@
 	<div class="container">
 	<div class="row">
   <h2 class="line">Account Details </h2>Last Login Date  &nbsp: &nbsp<span style="color:#0a0aff"> {{lastLoginDate}}</span>
-  <table class="table table-bordered mytable" style="width=400;">
+  <table class="table table-bordered" style="width=400;">
       <tr>
         <th style="width: 504px;">Distributor Id &nbsp:</th>
         <td style="width: 504px;">{{authUser.distributerId}}  <h4>Account Status :</h4>
@@ -40,13 +40,22 @@
         <th>Sponser Id / Sponser Name &nbsp:</th>
         <td>{{authUser.sponsorID}} / {{authUser.mySponserName}}</td>
       </tr>
-      <tr>
+      
+      <tr ng-if="authUser.duesAmount>0 && authUser.status=='ACTIVE'">
         <th>Paid Amount / Dues Amount &nbsp:</th>
-        <td><i class="fa fa-rupee"></i> {{authUser.paidAmount}} &nbsp/&nbsp <i class="fa fa-rupee"></i> {{authUser.duesAmount}} / 
-       <div ng-if="authUser.duesAmount>=0 && authUser.status!='ACTIVE' "> 
-       </br><i class="fa fa-clock-o"></i><span style="color:#0a0aff">&nbsp<b>{{leftDate}} days remaining</b> </span>
-       </br><b>Note :</b> dues must be cleared before <b> {{dateToString(thirtyDays)}} </b> 
-       </div></td>
+        <td><i class="fa fa-rupee"></i> {{authUser.paidAmount}} &nbsp/&nbsp <i class="fa fa-rupee"></i> {{authUser.duesAmount}} 
+      </td>
+      </tr>
+     <tr ng-if="authUser.status!='ACTIVE'">
+        <th>Paid Amount / Dues Amount &nbsp:</th>
+        <td><i class="fa fa-rupee"></i> {{authUser.paidAmount}} &nbsp/&nbsp <i class="fa fa-rupee"></i> {{authUser.duesAmount}} 
+       
+       <div ng-show="noOfDaysfromCreatedDate<30"></br><i class="fa fa-clock-o"></i><span style="color:#0a0aff">&nbsp<b>{{leftDay}} days remaining</b> </span></div>
+       <div ng-show="leftDay==0"></br><i class="fa fa-clock-o"></i><span style="color:#0a0aff">&nbsp<b> Today is the last day you can pay without paying your Penalty Fee. </b> </span></div>
+       </br><b>Note :</b> Dues amount should be cleared before <b> {{dateToString(thirtyDays)}} </b> 
+       <div ng-if="leftDay<=7" >Penalty Fee &nbsp:&nbsp <span style="color:rgb(255, 45, 41)" >
+       <i class="fa fa-rupee" ></i> 100.00 </span></div>
+       </td>
       </tr>
       
    <!--   <tr>
