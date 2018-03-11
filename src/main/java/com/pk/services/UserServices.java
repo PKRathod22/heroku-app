@@ -114,41 +114,48 @@ public class UserServices {
 				user.setStatus("INPROGRESS");
 			else
 				user.setStatus("BLOCKED");
-
 			if (user.getPackageName() != null
-					&& user.getPackageName().equalsIgnoreCase("Flywin Premium package- 4399.00 (FBV :50.00)")
-					&& user.getPaidAmount() != null) {
+					&& user.getPackageName().trim().equalsIgnoreCase("Flywin Premium package- 4399.00 (FBV :50.00)")) {
 				Double packagePrice = 4399.00;
-				Double paidAmount = user.getPaidAmount();
-				Double duesAmount = packagePrice - paidAmount;
-				user.setDuesAmount(duesAmount);
-			} else if (user.getPackageName() != null
-					&& user.getPackageName().equalsIgnoreCase("Flywin crown package-9999.00 (FBV :50.00)")
-					&& user.getPaidAmount() != null) {
+				if( user.getPaidAmount()!=null){
+					Double paidAmount = user.getPaidAmount();
+					Double duesAmount = packagePrice - paidAmount;	
+					user.setDuesAmount(duesAmount);
+				}else{
+					user.setDuesAmount(packagePrice);	
+				}
+			}else if (user.getPackageName() != null
+					&& user.getPackageName().trim().equalsIgnoreCase("Flywin crown package-9999.00 (FBV :50.00)")) {
 				Double packagePrice = 9999.00;
-				Double paidAmount = user.getPaidAmount();
-				Double duesAmount = packagePrice - paidAmount;
-				user.setDuesAmount(duesAmount);
-			} else if (user.getPackageName() != null
-					&& user.getPackageName().equalsIgnoreCase("Flywin Silver package-12999.00 (FBV :100.00)")
-					&& user.getPaidAmount() != null) {
+				if( user.getPaidAmount()!=null){
+					Double paidAmount = user.getPaidAmount();
+					Double duesAmount = packagePrice - paidAmount;	
+					user.setDuesAmount(duesAmount);
+				}else{
+					user.setDuesAmount(packagePrice);	
+				}
+			}else if (user.getPackageName() != null
+					&& user.getPackageName().trim().equalsIgnoreCase("Flywin Silver package-12999.00 (FBV :100.00)")) {
 				Double packagePrice = 12999.00;
-				Double paidAmount = user.getPaidAmount();
-				Double duesAmount = packagePrice - paidAmount;
-				user.setDuesAmount(duesAmount);
-			} else if (user.getPackageName() != null
-					&& user.getPackageName().equalsIgnoreCase("Flywin Diamond package-18999.00 (FBV :100.00)")
-					&& user.getPaidAmount() != null) {
+				if( user.getPaidAmount()!=null){
+					Double paidAmount = user.getPaidAmount();
+					Double duesAmount = packagePrice - paidAmount;	
+					user.setDuesAmount(duesAmount);
+				}else{
+					user.setDuesAmount(packagePrice);	
+				}
+			}else if (user.getPackageName() != null
+					&& user.getPackageName().trim().equalsIgnoreCase("Flywin Diamond package-18999.00 (FBV :100.00)")) {
 				Double packagePrice = 18999.00;
-				Double paidAmount = user.getPaidAmount();
-				Double duesAmount = packagePrice - paidAmount;
-				user.setDuesAmount(duesAmount);
-			}
-
-			if (user.getPaidAmount() == null)
-				user.setPaidAmount(0.0d);
-			if (user.getDuesAmount() == null)
-				user.setDuesAmount(0.0d);
+				if( user.getPaidAmount()!=null){
+					Double paidAmount = user.getPaidAmount();
+					Double duesAmount = packagePrice - paidAmount;	
+					user.setDuesAmount(duesAmount);
+				}else{
+					user.setDuesAmount(packagePrice);	
+				}
+			} 
+				
 			user.setCreatedDate(new Date());
 		}
 	}
